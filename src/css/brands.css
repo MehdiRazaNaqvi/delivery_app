@@ -1,0 +1,44 @@
+.storespage {
+    width: 100vw;
+    min-height: 100vh;
+    height: max-content;
+    /* background-color: yellow; */
+
+    display: grid;
+    /* grid-template-columns: repeat(1, 1fr); */
+    /* grid-template-rows: repeat(2, 1fr); */
+
+
+}
+
+
+
+
+.divu{
+width: 100vw;
+height: 100vh;
+/* background-color: red; */
+
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
+
+.half_img{
+    width: 50%;
+    height: 50%;
+}
+
+
+
+.span_offer{
+    font-size: xx-large;
+    font-weight: bolder;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
