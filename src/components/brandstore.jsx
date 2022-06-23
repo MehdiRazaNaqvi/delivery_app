@@ -1,12 +1,24 @@
 
 import { useNavigate, useParams } from "react-router-dom"
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import "../css/brandstore.css"
+
+
+import { current_user } from "../store/counterslice"
+
+
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../config/firebase.js";
+
+
+
 
 const App = () => {
 
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const d = useParams();
 
@@ -25,6 +37,37 @@ const App = () => {
 
 
 
+    const google_login = () => {
+
+
+
+
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+
+                const user = result.user;
+
+
+                const obj = { name: user.displayName, pic: user.photoURL }
+
+                dispatch(current_user(obj))
+
+
+            }).catch((error) => {
+
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("errorMessage")
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
+    }
+
+
 
 
     return (
@@ -36,10 +79,18 @@ const App = () => {
 
 
                 <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
+
                 <span className="nav_inner" >
-                    
                     <a href="/cart">cart</a>
-                    <a href="/brands">sign in</a>
+                    {count.currentUser.name == "none" ?
+                        <a onClick={() => google_login()}>sign in</a>
+                        :
+
+                        <div className="small_nav_img">
+                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
+                        </div>
+
+                    }
                 </span>
 
             </div>

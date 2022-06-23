@@ -56,12 +56,12 @@ body {
 
 
 .btn_normal {
-    font: xx-small;
+  
     background-color: rgb(247, 247, 247);
     color: rgb(55, 55, 55);
     border: 0.5px solid rgb(182, 182, 182);
     width: 10vw;
-    font-size: 70%;
+    font-size: 50%;
 }
 
 

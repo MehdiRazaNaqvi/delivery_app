@@ -1,41 +1,48 @@
 import "../css/brands.css"
 import { useNavigate } from "react-router-dom"
-
+import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
-import {current_user} from "../store/counterslice"
+import {  current_user } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
 
-const provider = new GoogleAuthProvider();
+
 
 
 
 const App = () => {
+    const count = useSelector(state => state.counter)
+
 
 
     const dispatch = useDispatch()
 
 
+
+
     const google_login = () => {
+
+
+        const provider = new GoogleAuthProvider();
 
         signInWithPopup(auth, provider)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
-                
-                const user = result.user;
-                
 
-                const obj = {name : user.displayName , pic : user.photoURL}
-                console.log(obj)
+                const user = result.user;
+
+
+                const obj = { name: user.displayName, pic: user.photoURL }
+
                 dispatch(current_user(obj))
 
 
             }).catch((error) => {
-                
+
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log("errorMessage")
@@ -43,6 +50,9 @@ const App = () => {
                 // ...
             });
     }
+
+
+
 
 
 
@@ -61,8 +71,10 @@ const App = () => {
 
     ]
 
+
     return (
         <div className="storespage">
+
 
             <div className="navbar" >
 
@@ -71,10 +83,19 @@ const App = () => {
 
                 <span className="nav_inner" >
                     <a href="/cart">cart</a>
-                    <a onClick={() => google_login()}>sign in</a>
+                    {count.currentUser.name == "none" ?
+                        <a onClick={() => google_login()}>sign in</a>
+                        :
+
+                        <div className="small_nav_img">
+                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
+                        </div>
+
+                    }
                 </span>
 
             </div>
+
 
 
             {/* 

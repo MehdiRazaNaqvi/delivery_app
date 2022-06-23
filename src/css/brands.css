@@ -46,8 +46,9 @@
 .navbar {
     width: 100%;
     height: 7%;
-    background-color: rgba(255, 255, 255, 0.9);
+    /* background-color: rgba(255, 0, 0, 0.9); */
 
+    background-color: orange;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,6 +59,7 @@
     position: fixed;
 
     z-index: 1;
+
 }
 
 
@@ -142,3 +144,31 @@ a {
 
 }
 
+
+
+.small_nav_img{
+    border: 0.1px solid rgb(255, 255, 255);
+    border-radius: 50%;
+
+    width: 100%;
+    height: 100%;
+
+
+
+ }
+
+
+
+
+ .nav_inner{
+    /* background-color: green; */
+    /* width: 15%; */
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+
+    display: flex;
+    align-items: center;
+    
+ }
