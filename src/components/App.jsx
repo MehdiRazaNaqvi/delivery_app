@@ -18,11 +18,15 @@ const App = () => {
             <div className="part1">
                 <h1>We deliver rich and fast</h1>
 
-                <span>
-                    <button onClick={() => navigate("/brands")} className="btn btn-outline-light">Visit your favorite stores </button>
-                    <button className="btn btn-outline-dark">Join us</button>
-                </span>
 
+
+                <button onClick={() => navigate("/brands")} className="btn btn-outline-light visit">Visit your favorite stores</button>
+
+
+                <span>
+                    <button className="btn_normal btn btn-outline-dark">Continue as a Rider</button>
+                    <button className="btn_normal btn btn-outline-dark">Join us</button>
+                </span>
 
             </div>
 
@@ -55,8 +59,8 @@ const App = () => {
                 {/* <img className="main_img" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b992ed47907367.58c7cecf372e0.jpg"  /> */}
 
 
-                    {/* <img className="main_img" src={undraw1}  /> */}
-                
+                {/* <img className="main_img" src={undraw1}  /> */}
+
             </div>
 
 
