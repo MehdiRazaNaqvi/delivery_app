@@ -5,7 +5,7 @@ import Brands from "./brands"
 
 import BrandStore from "./brandstore"
 
-
+import Cart from "./cart"
 
 const App = () => {
     return (
@@ -15,6 +15,7 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/brands" element={<Brands />} />
                     <Route path="/brands/:brandname" element={<BrandStore />} />
+                    <Route path="/cart" element={<Cart />} />
                 </Routes>
             </Router>
         </div>

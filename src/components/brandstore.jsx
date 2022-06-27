@@ -29,6 +29,7 @@ const App = () => {
 
 
     console.log(brandkaname)
+    // console.log(count.cart.length)
 
     let product = {}
 
@@ -81,7 +82,7 @@ const App = () => {
                 <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
 
                 <span className="nav_inner" >
-                    <a href="/cart">cart</a>
+                    <a href="/cart">cart {count.cart.length} </a>
                     {count.currentUser.name == "none" ?
                         <a onClick={() => google_login()}>sign in</a>
                         :

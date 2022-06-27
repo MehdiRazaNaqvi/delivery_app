@@ -35,6 +35,9 @@ const initialState = {
     { brand: 'Hemani', pic: "https://i.pinimg.com/originals/d3/41/91/d34191d9984fdf9444607026400a08d5.png", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
 
   ]
+  ,
+
+  cart : ["dew","cefeqw"]
 
 }
 
