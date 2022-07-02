@@ -37,7 +37,7 @@ const initialState = {
   ]
   ,
 
-  cart : ["dew","cefeqw"]
+  cart : ["dew","cefeqw" , "dew","cefeqw" , "dew","cefeqw" , "dew","cefeqw" , "dew","cefeqw" , "dew","cefeqw"]
 
 }
 

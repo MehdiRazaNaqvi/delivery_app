@@ -1,5 +1,6 @@
 
 import { useSelector } from "react-redux"
+// import "../css/cart.css"
 
 const App = () => {
 
@@ -8,15 +9,24 @@ const App = () => {
 
 
 
+    
 
     return (
 
-        count.cart.map((v, i) => (
+        <div className="cart_main">
 
-            <div key={i} >
-                {v}
-            </div>
-        ))
+
+
+
+            {count.cart.map((v, i) => (
+
+                <div className="cart_item" key={i} >
+                    {v}
+                </div>
+
+            ))
+            }
+        </div>
 
     )
 

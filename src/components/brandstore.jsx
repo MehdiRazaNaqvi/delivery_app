@@ -10,6 +10,7 @@ import { current_user } from "../store/counterslice"
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
+import { useState } from "react";
 
 
 
@@ -19,6 +20,8 @@ const App = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [cartshow, setcartshow] = useState(false);
 
     const d = useParams();
 
@@ -76,13 +79,14 @@ const App = () => {
 
         <div class="profile">
 
+
             <div className="navbar" >
 
 
                 <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
 
                 <span className="nav_inner" >
-                    <a href="/cart">cart {count.cart.length} </a>
+                    <a onClick={() => setcartshow(!cartshow)}>cart <span className="cartlen"> {count.cart.length} </span> </a>
                     {count.currentUser.name == "none" ?
                         <a onClick={() => google_login()}>sign in</a>
                         :
@@ -98,7 +102,17 @@ const App = () => {
 
 
 
-            <div class="profile_u">
+            <div className={cartshow ? "visible_cart" : "invisible_cart"} >
+
+                {count.cart.map((v, i) => <span className="cart_item" key={i}>  <h6 className="cart_con" >{v}</h6> <button className="btn btnremove btn-outline-dark">Remove</button> </span>)}
+
+
+            </div>
+
+
+
+
+            <div class={cartshow == false ? "profile_u" : "invisible_cart"}>
 
                 <div class="pic_div">
 
@@ -106,7 +120,9 @@ const App = () => {
 
                 </div>
 
+
                 <div class="details_div">
+
                     <h2>{product.brand}</h2>
                     <h6>established 5 years ago</h6>
                     <h6>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, vel quam. Cum dicta ratione, natus ad ut explicabo perferendis assumenda veritatis itaque! Nesciunt fuga obcaecati voluptatem praesentium, laborum atque unde.</h6>
@@ -114,11 +130,14 @@ const App = () => {
                 </div>
 
 
+
             </div>
 
 
 
-            <div class="profile_l">
+
+
+            <div class={cartshow === false ? "profile_l" : "invisible_cart"}>
 
                 {product.products.map((v, i) => (
 

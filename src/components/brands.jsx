@@ -13,6 +13,7 @@ import { auth } from "../config/firebase.js";
 
 
 
+
 const App = () => {
     const count = useSelector(state => state.counter)
 
@@ -23,6 +24,7 @@ const App = () => {
 
 
 
+    
     const google_login = () => {
 
 
@@ -56,20 +58,23 @@ const App = () => {
 
 
 
+
     const navigate = useNavigate();
 
-    const store = [
-        "Olivia",
-        "Hemani",
-        "J",
-        "Ponds",
-        "Grocery",
-        "Dairy",
-        "Olay",
-        "Gul Ahmed",
-        "Dalda",
+    const store = [];
 
-    ]
+    count.brands.map( (v) => store.push(v.brand)   )
+
+        // "Olivia",
+        // "Hemani",
+        // "J",
+        // "Ponds",
+        // "Grocery",
+        // "Dairy",
+        // "Olay",
+        // "Gul Ahmed",
+        // "Dalda",
+
 
 
     return (
@@ -82,7 +87,7 @@ const App = () => {
                 <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
 
                 <span className="nav_inner" >
-                    <a href="/cart">cart {count.cart.length}</a>
+                    <a href="/cart">cart  <span className="cartlen" >{count.cart.length} </span> </a>
                     {count.currentUser.name == "none" ?
                         <a onClick={() => google_login()}>sign in</a>
                         :

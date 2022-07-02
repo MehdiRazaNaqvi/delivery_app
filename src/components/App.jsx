@@ -8,7 +8,25 @@ import { useNavigate } from "react-router-dom"
 const App = () => {
     const navigate = useNavigate()
 
+    const fetching = () => {
 
+        const   headers = {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': '*'
+        }
+
+        fetch('http://localhost:4000/getmongo', {
+            method: 'get',
+            headers : headers
+        }).then((data) => data.json())
+        .then((r) => console.log(r))
+    }
+
+
+
+    
 
 
     return (
@@ -26,9 +44,13 @@ const App = () => {
                 <span>
                     <button className="btn_normal btn btn-outline-dark">Continue as a Rider</button>
                     <button className="btn_normal btn btn-outline-dark">Join us</button>
+                    <button onClick={() => fetching()} className="btn_normal btn btn-outline-dark">fetch</button>
                 </span>
 
             </div>
+
+
+
 
 
             <div className="part2">
