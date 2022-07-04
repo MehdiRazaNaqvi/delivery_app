@@ -1,15 +1,12 @@
 import "../css/brands.css"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux";
-
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { current_user , load_data } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
-import { useState } from "react";
-
+import { useEffect , useState } from "react";
 
 
 
@@ -24,7 +21,11 @@ const App = () => {
 
 
 
-    const postt = () => {
+
+
+
+
+    const gett = () => {
 
         const headers = {
             'Content-Type': 'application/json;charset=UTF-8',
@@ -34,7 +35,7 @@ const App = () => {
         }
 
 
-        fetch('http://localhost:4000/getdata', {
+        fetch('https://bhaiyya-server.herokuapp.com/getdata', {
             method: 'GET',
             headers: headers
 
@@ -45,6 +46,16 @@ const App = () => {
 
 
     }
+
+
+
+    useEffect(() => {
+        
+        gett()
+    
+    } , []);
+
+
 
 
 
@@ -94,15 +105,6 @@ const App = () => {
 
     count.brands.map((v) => store.push(v.brand))
 
-    // "Olivia",
-    // "Hemani",
-    // "J",
-    // "Ponds",
-    // "Grocery",
-    // "Dairy",
-    // "Olay",
-    // "Gul Ahmed",
-    // "Dalda",
 
 
 
@@ -139,7 +141,6 @@ const App = () => {
 
 
             </div>
-
 
             {/* 
             <div className="divu" >
@@ -196,7 +197,7 @@ const App = () => {
             </div>
 
 
-            <button onClick={() => postt()} >POST</button>
+     
 
 
 

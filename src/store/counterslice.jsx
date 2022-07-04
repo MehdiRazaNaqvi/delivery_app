@@ -75,6 +75,13 @@ export const counterSlice = createSlice({
 
             console.log(payload.payload)
 
+    },
+
+
+    
+
+    add_to_cart : (state , payload) => {
+          console.log(payload.payload)
     }
 
 
