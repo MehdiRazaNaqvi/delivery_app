@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
-import {  current_user } from "../store/counterslice"
+import { current_user , load_data } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
+import { useState } from "react";
 
 
 
@@ -23,8 +24,30 @@ const App = () => {
 
 
 
+    const postt = () => {
 
-    
+        const headers = {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': '*'
+        }
+
+
+        fetch('http://localhost:4000/getdata', {
+            method: 'GET',
+            headers: headers
+
+        })
+        .then((d) => d.json())
+        .then((r) => dispatch(load_data(r[0])))
+
+
+
+    }
+
+
+
     const google_login = () => {
 
 
@@ -43,6 +66,9 @@ const App = () => {
                 dispatch(current_user(obj))
 
 
+
+
+
             }).catch((error) => {
 
                 const errorCode = error.code;
@@ -56,6 +82,9 @@ const App = () => {
 
 
 
+    const [cartshow, setcartshow] = useState(false);
+
+
 
 
 
@@ -63,17 +92,17 @@ const App = () => {
 
     const store = [];
 
-    count.brands.map( (v) => store.push(v.brand)   )
+    count.brands.map((v) => store.push(v.brand))
 
-        // "Olivia",
-        // "Hemani",
-        // "J",
-        // "Ponds",
-        // "Grocery",
-        // "Dairy",
-        // "Olay",
-        // "Gul Ahmed",
-        // "Dalda",
+    // "Olivia",
+    // "Hemani",
+    // "J",
+    // "Ponds",
+    // "Grocery",
+    // "Dairy",
+    // "Olay",
+    // "Gul Ahmed",
+    // "Dalda",
 
 
 
@@ -87,20 +116,29 @@ const App = () => {
                 <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
 
                 <span className="nav_inner" >
-                    <a href="/cart">cart  <span className="cartlen" >{count.cart.length} </span> </a>
+                    <a onClick={() => setcartshow(!cartshow)} >cart  <span className="cartlen" >{count.cart.length} </span> </a>
                     {count.currentUser.name == "none" ?
                         <a onClick={() => google_login()}>sign in</a>
                         :
 
-                        <div className="small_nav_img">
-                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
-                        </div>
+                        // <div className="small_nav_img">
+                        <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
+                        // </div>
 
                     }
                 </span>
 
             </div>
 
+
+
+
+            <div className={cartshow ? "visible_cart" : "invisible_cart"} >
+
+                {count.cart.map((v, i) => <span className="cart_item" key={i}>  <h6 className="cart_con" >{v}</h6> <button className="btn btnremove btn-outline-dark">Remove</button> </span>)}
+
+
+            </div>
 
 
             {/* 
@@ -135,7 +173,7 @@ const App = () => {
 
 
 
-            <div className="grid" >
+            <div className={cartshow == false ? "grid" : "invisible_cart"} >
 
                 {store.map((v, i) => (
 
@@ -158,6 +196,7 @@ const App = () => {
             </div>
 
 
+            <button onClick={() => postt()} >POST</button>
 
 
 

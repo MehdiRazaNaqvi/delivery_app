@@ -148,6 +148,8 @@ a {
 
 
 
+
+
 .small_nav_img {
     border: 0.1px solid rgb(255, 255, 255);
     border-radius: 50%;
@@ -163,7 +165,7 @@ a {
 
 
 .nav_inner {
-    /* background-color: green; */
+    /* background-color: green;  */
     /* width: 15%; */
     height: 100%;
     padding: 0;
@@ -182,7 +184,7 @@ a {
 
 
 .cartlen , a{
-    display: inline-block;
+    display: inline-flex;
     
 }
 

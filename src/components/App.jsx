@@ -34,14 +34,15 @@ const App = () => {
 
 
             <div className="part1">
-                <h1>We deliver rich and fast</h1>
+
+                <h1 className="heading" >We deliver rich and fast</h1>
 
 
 
                 <button onClick={() => navigate("/brands")} className="btn btn-outline-light visit">Visit your favorite stores</button>
 
 
-                <span>
+                <span className="btn_span" >
                     <button className="btn_normal btn btn-outline-dark">Continue as a Rider</button>
                     <button className="btn_normal btn btn-outline-dark">Join us</button>
                     <button onClick={() => fetching()} className="btn_normal btn btn-outline-dark">fetch</button>

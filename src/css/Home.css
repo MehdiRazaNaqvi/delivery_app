@@ -76,3 +76,63 @@ body {
     height: 7vh;
     font-size: 70%;
 }
+
+
+
+
+
+
+
+
+@media screen and (max-width: 950px) {
+
+
+    .part2{
+        display: none;
+    }
+
+    .part1{
+        width: 100%;
+    }
+
+    .heading{
+        font-size: medium;
+    }
+
+    .visit{
+        font-size: xx-small;
+        width: 40%;
+    }
+
+
+    .btn_span{
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .btn_normal{
+     font-size: 45%;
+     width: 25vw;
+     height: 5vh;   
+    }
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+
+    .visit{
+        font-size: 45%;
+    }
+
+    .btn_normal{
+        font-size: 40%;
+    }
+
+    .heading{
+        font-size: small;
+    }
+
+}

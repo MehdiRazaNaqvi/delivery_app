@@ -130,7 +130,7 @@ h6 {
 
 
 .visible_cart {
-
+    position: absolute;
 
 
     width: 100%;
@@ -187,6 +187,9 @@ h6 {
 
     font-size: small;
 }
+
+
+
 
 
 @media screen and (max-width: 350px) {
