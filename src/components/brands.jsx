@@ -149,7 +149,7 @@ const App = () => {
 
                 {store.map((v, i) => (
 
-                    <div key={i} onClick={() => navigate(`/brands/${v}`)} className="card" >
+                    <div key={i} onClick={() => navigate(`/delivery_app/brands/${v}`)} className="card" >
 
 
 

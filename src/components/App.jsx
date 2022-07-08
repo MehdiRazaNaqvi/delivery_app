@@ -65,7 +65,7 @@ const App = () => {
 
 
 
-                <button onClick={() => navigate("/brands")} className="btn btn-outline-light visit">Visit your favorite stores</button>
+                <button onClick={() => navigate("/delivery_app/brands")} className="btn btn-outline-light visit">Visit your favorite stores</button>
 
 
                 <span className="btn_span" >
