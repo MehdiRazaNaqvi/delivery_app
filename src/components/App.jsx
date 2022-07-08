@@ -1,32 +1,58 @@
 import "../css/Home.css"
 import mainimg from "../css/imm.jpg"
 import undraw1 from "../css/undraw1.svg"
-
+import { useEffect } from "react"
 
 import { useNavigate } from "react-router-dom"
 
+import { useDispatch } from "react-redux"
+import {load_data} from "../store/counterslice"
+
 const App = () => {
+
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const fetching = () => {
 
-        const   headers = {
+    const gett = () => {
+
+        const headers = {
             'Content-Type': 'application/json;charset=UTF-8',
             "Access-Control-Allow-Origin": "*",
             'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': '*'
         }
 
-        fetch('http://localhost:4000/getmongo', {
-            method: 'get',
-            headers : headers
-        }).then((data) => data.json())
-        .then((r) => console.log(r))
+
+        fetch('https://bhaiyya-server.herokuapp.com/getdata', {
+            method: 'GET',
+            headers: headers
+
+        })
+            .then((d) => d.json())
+            .then((r) => dispatch(load_data(r[0])))
+
+
+
     }
 
 
 
-    
+
+    useEffect(() => {
+
+        gett()
+
+    }, []);
+
+
+
+
+
+
+
+
 
 
     return (
@@ -45,7 +71,6 @@ const App = () => {
                 <span className="btn_span" >
                     <button className="btn_normal btn btn-outline-dark">Continue as a Rider</button>
                     <button className="btn_normal btn btn-outline-dark">Join us</button>
-                    <button onClick={() => fetching()} className="btn_normal btn btn-outline-dark">fetch</button>
                 </span>
 
             </div>

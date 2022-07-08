@@ -1,12 +1,12 @@
 import "../css/brands.css"
 import { useNavigate } from "react-router-dom"
-import { useDispatch , useSelector } from "react-redux";
-import { current_user , load_data } from "../store/counterslice"
+import { useDispatch, useSelector } from "react-redux";
+import { current_user, load_data } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -23,37 +23,6 @@ const App = () => {
 
 
 
-
-
-    const gett = () => {
-
-        const headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': '*'
-        }
-
-
-        fetch('https://bhaiyya-server.herokuapp.com/getdata', {
-            method: 'GET',
-            headers: headers
-
-        })
-        .then((d) => d.json())
-        .then((r) => dispatch(load_data(r[0])))
-
-
-
-    }
-
-
-
-    useEffect(() => {
-        
-        gett()
-    
-    } , []);
 
 
 
@@ -123,14 +92,15 @@ const App = () => {
                         <a onClick={() => google_login()}>sign in</a>
                         :
 
-                        // <div className="small_nav_img">
+                        <div className="small_nav_img">
                         <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
-                        // </div>
+                        </div>
 
                     }
                 </span>
 
             </div>
+
 
 
 
@@ -141,6 +111,7 @@ const App = () => {
 
 
             </div>
+
 
             {/* 
             <div className="divu" >
@@ -197,7 +168,7 @@ const App = () => {
             </div>
 
 
-     
+
 
 
 
