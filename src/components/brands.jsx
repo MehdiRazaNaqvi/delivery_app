@@ -6,8 +6,7 @@ import { current_user, load_data } from "../store/counterslice"
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
-import { useEffect, useState } from "react";
-
+import { useEffect} from "react";
 
 
 
@@ -22,7 +21,56 @@ const App = () => {
 
 
 
+    const gett = () => {
 
+        const headers = {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': '*'
+        }
+
+
+        fetch('https://bhaiyya-server.herokuapp.com/getdata', {
+            method: 'GET',
+            headers: headers
+
+        })
+            .then((d) => d.json())
+            .then((r) => dispatch(load_data(r[0])))
+
+
+
+    }
+
+
+
+
+
+    const userExists = () => {
+
+
+
+        var userData = JSON.parse(localStorage.getItem("delivery-user"));
+
+        // console.log(userData)
+        userData ?
+
+
+            dispatch(current_user(userData))
+
+
+
+
+            : console.log("nae hai")
+
+
+
+
+
+
+
+    }
 
 
 
@@ -41,9 +89,11 @@ const App = () => {
                 const user = result.user;
 
 
-                const obj = { name: user.displayName, pic: user.photoURL }
+                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
 
                 dispatch(current_user(obj))
+
+                localStorage.setItem("delivery-user", JSON.stringify(obj))
 
 
 
@@ -62,10 +112,6 @@ const App = () => {
 
 
 
-    const [cartshow, setcartshow] = useState(false);
-
-
-
 
 
     const navigate = useNavigate();
@@ -76,6 +122,9 @@ const App = () => {
 
 
 
+    useEffect(() => { gett(); userExists() }, [2])
+
+
 
     return (
         <div className="storespage">
@@ -84,16 +133,34 @@ const App = () => {
             <div className="navbar" >
 
 
-                <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
+                <img className="logoimg" onClick={() => navigate("/delivery_app")} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
 
                 <span className="nav_inner" >
-                    <a onClick={() => setcartshow(!cartshow)} >cart  <span className="cartlen" >{count.cart.length} </span> </a>
-                    {count.currentUser.name == "none" ?
-                        <a onClick={() => google_login()}>sign in</a>
+
+                    <div className="small_nav_img_box">
+                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/favorite-cart.png" onClick={() => navigate("/delivery_app/cart")} className="cart_img" />  <span className="cartlen" >{count.currentUser.cart.length} </span>
+                    </div>
+
+
+
+                    <div className="small_nav_img_box">
+                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/laptop-metrics.png" className="cart_img" />
+                    </div>
+
+
+
+                    {count.currentUser.username == "none" ?
+
+                        <div onClick={() => google_login()} className="small_nav_img_box">
+                            <img referrerPolicy="no-referrer" className="small_nav_img" src="https://img.icons8.com/material-outlined/24/000000/user--v1.png" />
+                        </div>
+
+
+
                         :
 
-                        <div className="small_nav_img">
-                        <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
+                        <div className="small_nav_img_box">
+                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.photoURL} />
                         </div>
 
                     }
@@ -105,47 +172,9 @@ const App = () => {
 
 
 
-            <div className={cartshow ? "visible_cart" : "invisible_cart"} >
-
-                {count.cart.map((v, i) => <span className="cart_item" key={i}>  <h6 className="cart_con" >{v}</h6> <button className="btn btnremove btn-outline-dark">Remove</button> </span>)}
 
 
-            </div>
-
-
-            {/* 
-            <div className="divu" >
-                <span className="half_img span_offer " > Get instant delivery all over pakistan <button className="btn btn-outline-warning">Shop Now!</button> </span>
-                <img className="half_img" src="https://www.cheetay.pk/static/images/newLandingPage/grocery.jpg" />
-            </div>
-
-
-
-
-            <div className="divu" >
-                <img className="half_img" src="https://www.cheetay.pk/static/images/newLandingPage/food.jpg" />
-                <span className="half_img span_offer " > Get instant delivery all over pakistan <button className="btn btn-outline-warning">Shop Now!</button> </span>
-            </div>
-
-
-
-
-            <div className="divu" >
-                <span className="half_img span_offer " > Get instant delivery all over pakistan <button className="btn btn-outline-warning">Shop Now!</button> </span>
-                <img className="half_img" src="https://www.cheetay.pk/static/images/newLandingPage/pharma.jpg" />
-            </div>
-
-
-            <div className="divu" >
-                <img className="half_img" src="https://www.cheetay.pk/static/images/newLandingPage/dairy.jpg" />
-                <span className="half_img span_offer " > Get instant delivery all over pakistan <button className="btn btn-outline-warning">Shop Now!</button> </span>
-            </div> */}
-
-
-
-
-
-            <div className={cartshow == false ? "grid" : "invisible_cart"} >
+            <div className="grid"  >
 
                 {store.map((v, i) => (
 
@@ -168,6 +197,9 @@ const App = () => {
             </div>
 
 
+
+
+       
 
 
 

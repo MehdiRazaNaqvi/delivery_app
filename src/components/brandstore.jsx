@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux"
 import "../css/brandstore.css"
 
 
-import { current_user } from "../store/counterslice"
+import { current_user, load_data } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
-import { useState } from "react";
+
+import { add_cart } from "../store/counterslice"
+import { useEffect } from "react";
 
 
 
@@ -21,7 +23,38 @@ const App = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [cartshow, setcartshow] = useState(false);
+
+
+
+
+
+
+
+    const add_to_cart = (payload) => {
+
+        dispatch(add_cart(payload.v))
+
+        const headers = {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': '*'
+        }
+
+        // fetch("http://localhost:4000/add_to_cart", {
+        //     method: 'POST',
+        //     headers: headers,
+        //     body: JSON.stringify(payload)
+        // })
+        //     .then(r => alert("cart updated"))
+
+
+
+    }
+
+
+
+
 
     const d = useParams();
 
@@ -31,19 +64,18 @@ const App = () => {
     const count = useSelector(state => state.counter)
 
 
-    console.log(brandkaname)
+    // console.log(brandkaname)
     // console.log(count.cart.length)
 
-    let product = {}
+    let product = {products : []}
 
     count.brands.map((v) => v.brand.toLowerCase() === brandkaname.toLowerCase() ? product = v : null)
 
 
 
 
+
     const google_login = () => {
-
-
 
 
         const provider = new GoogleAuthProvider();
@@ -56,9 +88,14 @@ const App = () => {
                 const user = result.user;
 
 
-                const obj = { name: user.displayName, pic: user.photoURL }
+                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
 
                 dispatch(current_user(obj))
+
+                localStorage.setItem("delivery-user", JSON.stringify(obj))
+
+
+
 
 
             }).catch((error) => {
@@ -77,22 +114,41 @@ const App = () => {
     return (
 
 
-        <div class="profile">
+        <div className="profile">
+
 
 
             <div className="navbar" >
 
 
-                <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
+                <img className="logoimg" onClick={() => navigate("/delivery_app/")} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
 
                 <span className="nav_inner" >
-                    <a onClick={() => setcartshow(!cartshow)}>cart <span className="cartlen"> {count.cart.length} </span> </a>
-                    {count.currentUser.name == "none" ?
-                        <a onClick={() => google_login()}>sign in</a>
+
+                    <div className="small_nav_img_box">
+                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/favorite-cart.png" onClick={() => navigate("/delivery_app/cart")} className="cart_img" />  <span className="cartlen" >{count.currentUser.cart.length} </span>
+                    </div>
+
+
+
+                    <div className="small_nav_img_box">
+                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/laptop-metrics.png" className="cart_img" />
+                    </div>
+
+
+
+                    {count.currentUser.username == "none" ?
+
+                        <div onClick={() => google_login()} className="small_nav_img_box">
+                            <img referrerPolicy="no-referrer" className="small_nav_img" src="https://img.icons8.com/material-outlined/24/000000/user--v1.png" />
+                        </div>
+
+
+
                         :
 
-                        <div className="small_nav_img">
-                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.pic} />
+                        <div className="small_nav_img_box">
+                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.photoURL} />
                         </div>
 
                     }
@@ -102,26 +158,21 @@ const App = () => {
 
 
 
-            <div className={cartshow ? "visible_cart" : "invisible_cart"} >
-
-                {count.cart.map((v, i) => <span className="cart_item" key={i}>  <h6 className="cart_con" >{v}</h6> <button className="btn btnremove btn-outline-dark">Remove</button> </span>)}
-
-
-            </div>
 
 
 
 
-            <div class={cartshow == false ? "profile_u" : "invisible_cart"}>
 
-                <div class="pic_div">
+            <div className="profile_u">
+
+                <div className="pic_div">
 
                     <img className="main_img" src={product.pic} />
 
                 </div>
 
 
-                <div class="details_div">
+                <div className="details_div">
 
                     <h2>{product.brand}</h2>
                     <h6>established 5 years ago</h6>
@@ -137,7 +188,7 @@ const App = () => {
 
 
 
-            <div class={cartshow === false ? "profile_l" : "invisible_cart"}>
+            <div className="profile_l">
 
                 {product.products.map((v, i) => (
 
@@ -148,7 +199,8 @@ const App = () => {
                         <div className="card-img-overlay-product">
                             <h6 className="card-title-product">{v.name}</h6>
                             <h6 className='price-product'>Rs. {v.price}</h6>
-                            <button className="btn btn-outline-success btn-small">Add to cart</button>
+                            <button className="btn btn-outline-success btn-small" onClick={() => add_to_cart({ v, brandkaname })} >Add</button>
+                            {/* <img src="https://img.icons8.com/avantgarde/100/000000/add.png" className="btn-small" onClick={() => add_to_cart({ v, brandkaname })} /> */}
                         </div>
 
                     </div>

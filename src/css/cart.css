@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+
+.cartpage {
+    width: 100%;
+    height: 100vh;
+
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+
+
+.cartgrid {
+    width: 100%;
+    height: 100%;
+
+
+    background-color: rgb(255, 255, 255);
+    /* padding-top: 10%; */
+    padding: 3%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* grid-template-rows: repeat(4,1fr); */
+    place-items: center;
+}

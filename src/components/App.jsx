@@ -1,18 +1,25 @@
 import "../css/Home.css"
 import mainimg from "../css/imm.jpg"
 import undraw1 from "../css/undraw1.svg"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 
 import { useNavigate } from "react-router-dom"
 
 import { useDispatch } from "react-redux"
-import {load_data} from "../store/counterslice"
+import { load_data } from "../store/counterslice"
+import { useSelector } from "react-redux"
+
+
+import lottie from "lottie-web"
+
 
 const App = () => {
 
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+
 
 
     const gett = () => {
@@ -37,20 +44,32 @@ const App = () => {
 
     }
 
+    const container = useRef(null)
+    const count = useSelector(state => state.counter)
+
 
 
 
     useEffect(() => {
 
-        gett()
+        gett();
+
+        lottie.loadAnimation({
+            container: container.current,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: require("./skins/shop.json")
+        })
 
     }, []);
 
 
 
+    {
 
-
-
+        count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("data fetching")
+    }
 
 
 
@@ -65,7 +84,10 @@ const App = () => {
 
 
 
-                <button onClick={() => navigate("/delivery_app/brands")} className="btn btn-outline-light visit">Visit your favorite stores</button>
+
+
+                {/* <button onClick={() => navigate("/delivery_app/brands")} className="btn btn-outline-light visit">Visit your favorite stores</button> */}
+                <div className="middle" ref={container}></div>
 
 
                 <span className="btn_span" >
