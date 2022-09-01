@@ -200,23 +200,23 @@ h6 {
 @media screen and (max-width: 350px) {
 
 
-       .cart_con {
+    .cart_con {
         font-size: 15%;
     }
 
-    .btnremove{
+    .btnremove {
         font-size: 10%;
         width: 30%;
         height: 50%;
     }
 
-    .cart_item{
+    .cart_item {
         width: 75%;
     }
 
-   
 
-    
+
+
 }
 
 
@@ -249,6 +249,11 @@ h6 {
 
 
 @media screen and (max-width: 550px) {
+
+
+
+
+
 
     .profile_u {
         flex-direction: column;
@@ -289,15 +294,21 @@ h6 {
     .profile_l {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(5, 1fr);
+        /* background-color: red; */
+        column-gap: 0%;
+        padding-left: 0%;
+        padding-right: 0%;
+
 
     }
 
     .card-title-product {
-        font-size: 50%;
+        font-size: 60%;
     }
 
     .price-product {
         font-size: 45%;
+        color: orange;
     }
 
 
@@ -307,7 +318,7 @@ h6 {
     }
 
 
-    .cart_item{
+    .cart_item {
         width: 75%;
     }
 

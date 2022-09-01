@@ -1,0 +1,204 @@
+.dashboard_base {
+    width: 100%;
+    height: 100vh;
+    /* background-color: pink; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+.line {
+    width: 90%;
+    height: 15%;
+    /* background-color: green; */
+    margin-top: 5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+
+
+
+.box {
+    width: 25%;
+    height: 100%;
+    background-color: rgb(143, 87, 255);
+    border-radius: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+
+.dosra{
+    background-color: orange
+    
+}
+
+.tesra{
+    background-color: rgb(46, 128, 46);
+
+}
+
+
+
+
+
+
+.bp {
+    width: 60%;
+    height: 100%;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 5%;
+}
+
+
+
+.sp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    /* background-color: rgb(179, 162, 162); */
+    font-size: x-small;
+    gap: 5%;
+    color: white;
+
+
+}
+
+
+.dash-main {
+    font-weight: 200;
+
+}
+
+
+.add-btn{
+    width: 25%;
+    font-size: x-small;
+}
+
+
+
+
+
+
+.form {
+    width: 90%;
+    height: 75%;
+    /* background-color: rgb(255, 248, 248); */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5%;
+
+    /* color: white; */
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 750px) {
+
+
+    .line{
+        height: 10vh;
+    }
+
+
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+
+.line{
+    height: 65vh;
+    flex-direction: column;
+}
+
+.box{
+    width: 90%;
+    height: 30%;
+}
+
+
+.sp{
+    /* background-color: red; */
+  
+    justify-content: center;
+}
+
+.bp{
+    /* background-color: yellow; */
+    padding: 1%;
+}
+
+.dash-main{
+    font-size: 2.3rem;
+}
+
+.form-control{
+    font-size: xx-small;
+}
+
+.add-btn{
+    font-size: xx-small;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 400px) {
+
+
+    .add-btn , .form-control{
+        font-size: 50%;
+    }
+    .add-btn{
+        width: 30%;
+    }
+    
+
+}

@@ -37,7 +37,9 @@ const initialState = {
   ]
 
   ,
-  isloading: false
+  isloading: false,
+  cart: [],
+  users: []
 }
 
 
@@ -71,6 +73,8 @@ export const counterSlice = createSlice({
     load_data: (state, payload) => {
 
       state.brands = payload.payload.brands
+      state.cart = payload.payload.cart
+      state.users = payload.payload.users
 
 
 
@@ -86,6 +90,14 @@ export const counterSlice = createSlice({
       state.currentUser.cart.push(payload.payload)
       localStorage.setItem("delivery-user", JSON.stringify(state.currentUser))
 
+    },
+
+
+
+
+    logout_local: (state) => {
+      localStorage.removeItem("delivery-user")
+      state.currentUser = { username: "none", photoURL: "", cart: [] }
     }
 
 
@@ -97,6 +109,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { current_user, load_data, add_cart } = counterSlice.actions
+export const { current_user, load_data, add_cart, logout_local } = counterSlice.actions
 
 export default counterSlice.reducer

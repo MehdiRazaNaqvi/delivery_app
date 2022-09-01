@@ -1,0 +1,286 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+.stats_base {
+
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+
+
+
+
+.charts {
+    width: 100%;
+    height: 93vh;
+    /* background-color: green; */
+
+    margin-top: 7%;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3%;
+    place-items: center;
+
+    padding: 4%;
+
+}
+
+
+
+
+
+
+.chart {
+    width: 100%;
+    height: 100%;
+    /* background-color: rgb(231, 231, 231); */
+    overflow: hidden;
+
+    border-radius: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: 5%; */
+    /* flex-direction: column; */
+}
+
+
+
+
+.four {
+    grid-column: 2/3;
+    grid-row: 2/4;
+    background-color: rgb(255, 251, 195);
+}
+
+
+
+.actual_bar {
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+}
+
+
+
+
+.one {
+    background-color: rgb(143, 87, 255);
+
+}
+
+.two {
+    background-color: lightcyan
+}
+
+.three {
+    background-color: orange;
+}
+
+.five {
+    background-color: rgb(46, 128, 46);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tp {
+    width: 40%;
+    height: 100%;
+    /* background-color: red;   */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    gap: 5%;
+    font-size: small;
+}
+
+
+
+.ep {
+    width: 60%;
+    height: 100%;
+    /* background-color: pink; */
+
+    padding: 5%;
+}
+
+
+
+.main {
+    font-weight: 300;
+    font-size: 3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 800px) {
+
+
+    .charts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    .four {
+        grid-column: 1/4;
+        grid-row: 3/4;
+    }
+
+    .two {
+        grid-column: 1/4;
+        grid-row: 2/3;
+    }
+
+
+    .one,
+    .three,
+    .five {
+        height: 70%;
+    }
+
+
+    .main {
+        font-size: 1.5rem;
+    }
+
+    .ep {
+        padding: 10%;
+        /* background-color: red; */
+    }
+
+
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 500px) {
+
+
+    .charts {
+        height: 100vh;
+        grid-template-rows: repeat(5, 1fr);
+
+        margin-top: 20%;
+    }
+
+
+
+
+
+
+    .one {
+        grid-column: 1/4;
+        grid-row: 1/2;
+    }
+
+    .three {
+        grid-column: 1/4;
+        grid-row: 2/3;
+    }
+
+
+
+    .five {
+        grid-column: 1/4;
+        grid-row: 3/4;
+    }
+
+
+    .four {
+        grid-column: 1/4;
+        grid-row: 4/5;
+    }
+
+
+
+    .two {
+        grid-column: 1/4;
+        grid-row: 5/6;
+    }
+
+    .chart {
+        height: 90%;
+
+
+    }
+
+
+
+    .ep {
+        /* background-color: red; */
+        padding: 2%;
+    }
+
+
+    .main {
+        font-size: 2.5rem;
+
+    }
+
+    .tp {
+        gap: 15%;
+        font-size: x-small;
+        /* background-color: red; */
+    }
+
+
+
+    .four , .two{
+        background-color: lightyellow;
+        
+    }
+   
+
+    .five .ep{
+        padding: 0;
+    }
+
+
+
+
+
+}

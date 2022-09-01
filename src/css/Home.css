@@ -14,8 +14,8 @@ body {
 }
 
 .part1 {
-    width: 50vw;
-    /* background-color: rgb(255, 255, 255); */
+    width: 100%;
+    /* background-color: rgb(206, 255, 216); */
     height: 100vh;
     display: flex;
     justify-content: space-around;
@@ -25,22 +25,6 @@ body {
 }
 
 
-.part2 {
-    width: 50vw;
-    height: 100vh;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  
-
-    /* background-image: linear-gradient(to right , rgba(255, 255, 255, 0.99) , rgba(255, 255, 255, 0.3)) , url('https://www.stroke.org/-/media/AHA/H4GM/Article-Images/fruit-and-vegetables.jpg'); */
-
-    /* background-image: linear-gradient(to right , rgba(255, 255, 255, 0.99) , rgba(255, 255, 255, 0.2)) , url('https://i.pinimg.com/originals/cb/a6/f3/cba6f397e064de87041b3abde702d0de.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;  */
-}
 
 
 
@@ -79,13 +63,32 @@ body {
 
 
 .middle{
-    height: 50vh;
-    width: 100%;
+    height : 65vh;
+    width:  100%;
     /* background-color: red; */
 }
 
 
 
+
+
+.heading{
+    width: 15%;
+    height: 7%;
+}
+
+
+
+/* .ab{
+    width: 70vw;
+    height: 20vh;
+    background-color: rgba(255, 170, 0, 0.4);
+    position: absolute;
+    top: 0%;
+    right: 0%;
+
+    border-radius: 0% 0% 0% 100% ;
+} */
 
 
 
@@ -138,7 +141,13 @@ body {
     }
 
     .heading{
-        font-size: small;
+        width: 35%;
+        height: 5%;
+        /* background-color: red; */
+    }
+
+    .middle{
+        height: 50vh;
     }
 
 }

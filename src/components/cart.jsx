@@ -1,14 +1,14 @@
 import "../css/cart.css"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { current_user, load_data } from "../store/counterslice"
+import { current_user, logout_local } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-
+import Navbar from "./navbar"
 
 
 const App = () => {
@@ -21,56 +21,6 @@ const App = () => {
 
 
 
-    const gett = () => {
-
-        const headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': '*'
-        }
-
-
-        fetch('https://bhaiyya-server.herokuapp.com/getdata', {
-            method: 'GET',
-            headers: headers
-
-        })
-            .then((d) => d.json())
-            .then((r) => dispatch(load_data(r[0])))
-
-
-
-    }
-
-
-
-
-
-    const userExists = () => {
-
-
-
-        var userData = JSON.parse(localStorage.getItem("delivery-user"));
-
-        // console.log(userData)
-        userData ?
-
-
-            dispatch(current_user(userData))
-
-
-
-
-            : console.log("nae hai")
-
-
-
-
-
-
-
-    }
 
 
 
@@ -110,6 +60,7 @@ const App = () => {
     }
 
 
+    const [logout, setlogout] = useState(false)
 
 
 
@@ -119,54 +70,14 @@ const App = () => {
 
 
 
-    useEffect(() => { gett(); userExists() }, [2])
-
-
-
     return (
         <div className="cartpage">
 
-
-            <div className="navbar" >
-
-
-                <img className="logoimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
-
-                <span className="nav_inner" >
-
-                    <div className="small_nav_img_box">
-                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/favorite-cart.png" onClick={() => navigate("/delivery_app/cart")} className="cart_img" />  <span className="cartlen" >{count.currentUser.cart.length} </span>
-                    </div>
+            <Navbar />
 
 
 
-                    <div className="small_nav_img_box">
-                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/laptop-metrics.png" className="cart_img" />
-                    </div>
-
-
-
-                    {count.currentUser.username == "none" ?
-
-                        <div onClick={() => google_login()} className="small_nav_img_box">
-                            <img referrerPolicy="no-referrer" className="small_nav_img" src="https://img.icons8.com/material-outlined/24/000000/user--v1.png" />
-                        </div>
-
-
-
-                        :
-
-                        <div className="small_nav_img_box">
-                            <img referrerPolicy="no-referrer" className="small_nav_img" src={count.currentUser.photoURL} />
-                        </div>
-
-                    }
-                </span>
-
-            </div>
-
-
-
+            {count.currentUser.cart.length == 0 ? <h4 className="empty">Cart is empty</h4> : null}
 
 
 
@@ -199,7 +110,11 @@ const App = () => {
 
 
 
-
+            <div className={logout ? "logout" : "invisible"}>
+                <p onClick={() => navigate("/delivery_app/register")}> Register your Brand </p>
+                <p onClick={() => navigate("/delivery_app/auth")}> Log in as a brand </p>
+                <p onClick={() => { dispatch(logout_local()); setlogout(false) }} > Logout? </p>
+            </div>
 
 
         </div>
