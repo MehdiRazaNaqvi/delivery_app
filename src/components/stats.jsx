@@ -38,66 +38,74 @@ const App = () => {
 
 
 
-    const google_login = () => {
 
 
-        const provider = new GoogleAuthProvider();
-
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-
-                const user = result.user;
-
-
-                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
-
-                dispatch(current_user(obj))
-
-                localStorage.setItem("delivery-user", JSON.stringify(obj))
+    // const [logout, setlogout] = useState(false)
 
 
 
 
+    const userdata = {
 
-            }).catch((error) => {
 
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("errorMessage")
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
+        // labels: ["Olivia", "Hemani", "Dell", "grocery"],
+        labels: count.charts_data.brands_names,
+
+        datasets: [{
+            label: "brands", data: count.charts_data.brands_prod, backgroundColor: ["rgb(250, 234, 99)", "lightsalmon", "lightgrey", "lightgreen"], barPercentage: 0.5,
+            barThickness: 20,
+
+            tension: 0.4,
+
+        }]
     }
 
 
 
 
 
-    const [logout, setlogout] = useState(false)
+
+    const userdata1 = {
 
 
-
-
-    const [userdata, setuserdata] = useState({
-
-
-        labels: ["Olivia", "Hemani", "Dell", "grocery"],
+        // labels: ["Olivia", "Hemani", "Dell", "grocery"],
+        labels: count.charts_data.sales_names,
 
         datasets: [{
-            label: "brands", data: [3, 4, 5, 4], backgroundColor: ["rgb(250, 234, 99)", "lightsalmon", "lightgrey", "lightgreen"], barPercentage: 0.5,
+            label: "brands", data: count.charts_data.sales_num, backgroundColor: ["rgb(250, 234, 99)", "lightsalmon", "lightgrey", "lightgreen"], barPercentage: 0.5,
             barThickness: 20,
 
             tension: 0.4,
 
         }]
-    })
+    }
+
+
+
+    const userdata2 = {
+
+
+        // labels: ["Olivia", "Hemani", "Dell", "grocery"],
+        labels: count.charts_data.users_names,
+
+        datasets: [{
+            label: "brands", data: count.charts_data.users_num, backgroundColor: ["rgb(250, 234, 99)", "lightsalmon", "lightgrey", "lightgreen"], barPercentage: 0.5,
+            barThickness: 20,
+
+            tension: 0.4,
+
+        }]
+    }
+
+
+
 
 
 
 
     return (
+
+
         <div className="stats_base">
 
 
@@ -110,14 +118,18 @@ const App = () => {
 
 
 
-                <div className="chart one">
 
-                    <span className="tp"><h1 className="main">{count.cart.length}</h1> sales</span>
+                <div className="chart three">
+
+
+
+                <span className="tp"><h1 className="main">{count.cart.length}</h1> sales</span>
+
                     <span className="ep">
 
-                        <Pie
+                        <Doughnut
                             className="actual_bar"
-                            data={userdata}
+                            data={userdata1}
 
 
 
@@ -129,7 +141,6 @@ const App = () => {
                         />
 
                     </span>
-
 
                 </div>
 
@@ -155,14 +166,13 @@ const App = () => {
 
 
 
-                <div className="chart three">
 
-
+                <div className="chart one">
 
                     <span className="tp"><h1 className="main">{count.brands.length}</h1> brands</span>
                     <span className="ep">
 
-                        <Doughnut
+                        <Pie
                             className="actual_bar"
                             data={userdata}
 
@@ -176,6 +186,7 @@ const App = () => {
                         />
 
                     </span>
+
 
                 </div>
 
@@ -213,7 +224,7 @@ const App = () => {
 
                         <PolarArea
                             className="actual_bar"
-                            data={userdata}
+                            data={userdata2}
 
 
 
@@ -239,11 +250,6 @@ const App = () => {
 
 
 
-            <div className={logout ? "logout" : "invisible"}>
-                <p onClick={() => navigate("/delivery_app/register")}> Register your Brand </p>
-                <p onClick={() => navigate("/delivery_app/auth")}> Log in as a brand </p>
-                <p onClick={() => { dispatch(logout_local()); setlogout(false) }} > Logout? </p>
-            </div>
 
 
 

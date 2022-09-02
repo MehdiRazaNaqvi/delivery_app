@@ -13,9 +13,13 @@ import { useRef } from "react";
 import lottie from "lottie-web"
 
 import Gif from "./skins/gif.gif"
-import { useState } from "react";
+import Navbar from "../components/navbar"
+
+
+
 
 const App = () => {
+    
     const count = useSelector(state => state.counter)
 
 
@@ -88,7 +92,7 @@ const App = () => {
 
 
 
-    const [logout, setlogout] = useState(false)
+    // const [logout, setlogout] = useState(false)
 
 
 
@@ -97,7 +101,7 @@ const App = () => {
         <div className="storespage">
 
 
-
+            {/* 
             <div className="navbar" >
 
 
@@ -139,8 +143,9 @@ const App = () => {
                 </span>
 
 
-            </div>
+            </div> */}
 
+            <Navbar />
 
 
 
@@ -188,12 +193,6 @@ const App = () => {
             }
 
 
-
-            <div className={logout ? "logout" : "invisible"}>
-                <p onClick={() => navigate("/delivery_app/register")}> Register your Brand </p>
-                <p onClick={() => navigate("/delivery_app/auth")}> Log in as a brand </p>
-                <p onClick={() => { dispatch(logout_local()); setlogout(false) }} > Logout? </p>
-            </div>
 
 
 

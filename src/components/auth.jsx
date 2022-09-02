@@ -67,28 +67,28 @@ const App = () => {
     return (
 
 
-        // count.brands.length > 1 ?
+        count.brands.length > 1 ?
 
 
-        <div className="auth_base">
+            <div className="auth_base">
 
 
-            <Navbar />
+                <Navbar />
 
 
-            <div className="back">
-                <input type="text" placeholder="Brand name" className="form-control" onChange={(e) => setauthen({ ...authen, name: e.target.value })} />
-                <input type="text" placeholder="Password" className="form-control" onChange={(e) => setauthen({ ...authen, password: e.target.value })} />
-                <button className="btn btn-primary register-btn" onClick={() => authenticate()}>Go</button>
+                <div className="back">
+                    <input type="text" placeholder="Brand name" className="form-control" onChange={(e) => setauthen({ ...authen, name: e.target.value })} />
+                    <input type="text" placeholder="Password" className="form-control" onChange={(e) => setauthen({ ...authen, password: e.target.value })} />
+                    <button className="btn btn-primary register-btn" onClick={() => authenticate()}>Go</button>
+                </div>
             </div>
-        </div>
 
-        // :
+            :
 
 
-        // <div className="auth_base">
-        //     <h6>Refresh the page</h6>
-        // </div>
+            <div className="auth_base">
+                <h6>Refresh the page</h6>
+            </div>
 
 
     )

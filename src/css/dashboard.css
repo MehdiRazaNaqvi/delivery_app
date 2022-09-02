@@ -1,10 +1,11 @@
 .dashboard_base {
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     /* background-color: pink; */
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 5%;
 }
 
 
@@ -40,12 +41,11 @@
 }
 
 
-.dosra{
+.dosra {
     background-color: orange
-    
 }
 
-.tesra{
+.tesra {
     background-color: rgb(46, 128, 46);
 
 }
@@ -86,11 +86,14 @@
 
 .dash-main {
     font-weight: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 
-.add-btn{
+.add-btn {
     width: 25%;
     font-size: x-small;
 }
@@ -102,18 +105,18 @@
 
 .form {
     width: 90%;
-    height: 75%;
+    height: 50%;
     /* background-color: rgb(255, 248, 248); */
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 5%;
+    gap: 10%;
 
     /* color: white; */
 
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 }
 
@@ -122,8 +125,16 @@
 
 
 
+.pic-fix {
+    width: 100%;
+    height: 100%;
+}
 
 
+.box-pic {
+    display: none;
+    /* background-color: white; */
+}
 
 
 
@@ -132,8 +143,14 @@
 @media screen and (max-width: 750px) {
 
 
-    .line{
+    .line {
         height: 10vh;
+    }
+
+    .sp {
+        /* background-color: red; */
+        gap: 0%;
+        align-items: center;
     }
 
 
@@ -145,39 +162,45 @@
 
 @media screen and (max-width: 600px) {
 
-.line{
-    height: 65vh;
-    flex-direction: column;
-}
+    .box-pic {
+        display: flex;
+        background-color: white;
+    }
 
-.box{
-    width: 90%;
-    height: 30%;
-}
+    .line {
+        height: 50%;
+        flex-direction: column;
+        /* background-color: red; */
+    }
+
+    .box {
+        width: 90%;
+        height: 30%;
+    }
 
 
-.sp{
-    /* background-color: red; */
-  
-    justify-content: center;
-}
+    .sp {
+        /* background-color: red; */
 
-.bp{
-    /* background-color: yellow; */
-    padding: 1%;
-}
+        justify-content: center;
+    }
 
-.dash-main{
-    font-size: 2.3rem;
-}
+    .bp {
+        /* background-color: yellow; */
+        padding: 1%;
+    }
 
-.form-control{
-    font-size: xx-small;
-}
+    .dash-main {
+        font-size: 2.3rem;
+    }
 
-.add-btn{
-    font-size: xx-small;
-}
+    .form-control {
+        font-size: xx-small;
+    }
+
+    .add-btn {
+        font-size: xx-small;
+    }
 
 
 }
@@ -193,12 +216,20 @@
 @media screen and (max-width: 400px) {
 
 
-    .add-btn , .form-control{
+    .add-btn,
+    .form-control {
         font-size: 50%;
     }
-    .add-btn{
+
+
+    .add-btn {
         width: 30%;
     }
-    
+
+    .bp {
+        /* background-color: yellow; */
+        padding: 2%;
+    }
+
 
 }

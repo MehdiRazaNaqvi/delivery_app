@@ -39,7 +39,26 @@ const initialState = {
   ,
   isloading: false,
   cart: [],
-  users: []
+  users: [],
+
+
+
+  charts_data: {
+
+    brands_names: [],
+    brands_prod: [],
+
+
+    sales_names: [],
+    sales_num: [],
+
+
+    users_names: [],
+    users_num: [],
+
+
+
+  }
 }
 
 
@@ -78,10 +97,59 @@ export const counterSlice = createSlice({
 
 
 
+
+
+      const brands_prod = [];
+      const brands_names = [];
+
+
+      const sales_names = [];
+      const sales_num = [];
+
+
+
+      const users_names = [];
+      const users_num = [];
+
+
+      state.brands.map(v => brands_prod.push(v.products.length))
+      state.brands.map(v => brands_names.push(v.brand))
+
+      state.cart.map(v => { sales_names.push(v.v.name); })
+      state.cart.map(v => sales_num.push(1))
+
+
+      state.users.map(v => users_num.push(1))
+      state.users.map(v => users_names.push(v.username))
+
+
+
+
+
+
+      state.charts_data.brands_names = brands_names
+      state.charts_data.brands_prod = brands_prod
+
+
+      state.charts_data.sales_names = sales_names
+      state.charts_data.sales_num = sales_num
+
+
+      state.charts_data.users_names = users_names
+      state.charts_data.users_num = users_num
+
+
+
+
+
+
+
     },
 
 
 
+
+    
 
 
 

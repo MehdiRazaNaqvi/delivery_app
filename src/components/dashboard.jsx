@@ -71,7 +71,7 @@ const App = () => {
 
 
 
-    const [logout, setlogout] = useState(false)
+    // const [logout, setlogout] = useState(false)
 
 
 
@@ -173,6 +173,15 @@ const App = () => {
             <div className="line">
 
 
+                <div className="box box-pic">
+
+                   
+                   
+                   <img src={brand.pic} className="pic-fix" />
+                </div>
+
+
+
                 <div className="box">
 
                     <span className="sp"><h1 className="dash-main">{revenue}</h1>earned</span>
@@ -258,14 +267,6 @@ const App = () => {
             </div>
 
 
-
-
-
-            <div className={logout ? "logout" : "invisible"}>
-                <p onClick={() => navigate("/delivery_app/register")}> Register your Brand </p>
-                <p onClick={() => navigate("/delivery_app/auth")}> Log in as a brand </p>
-                <p onClick={() => { dispatch(logout_local()); setlogout(false) }} > Logout? </p>
-            </div>
 
 
 
