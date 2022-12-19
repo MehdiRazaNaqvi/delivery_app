@@ -1,13 +1,9 @@
 import { useParams } from "react-router-dom"
 
 
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../config/firebase.js";
 
 
 import { useSelector, useDispatch } from "react-redux";
-import { current_user, logout_local } from "../store/counterslice";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import "../css/dashboard.css"
@@ -16,6 +12,7 @@ import Navbar from "../components/navbar"
 
 import { Bar, Pie, Line, Doughnut, Radar, PolarArea, Scatter, Bubble } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
+import {api_url , headers} from "../config/api"
 
 
 
@@ -30,44 +27,10 @@ const App = () => {
 
 
     const count = useSelector(state => state.counter)
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
 
 
 
-    const google_login = () => {
-
-
-        const provider = new GoogleAuthProvider();
-
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-
-                const user = result.user;
-
-
-                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
-
-                dispatch(current_user(obj))
-
-                localStorage.setItem("delivery-user", JSON.stringify(obj))
-
-
-
-
-
-            }).catch((error) => {
-
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("errorMessage")
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
-    }
 
 
 
@@ -85,8 +48,16 @@ const App = () => {
 
 
 
+
     let revenue = 0;
     let i = 0;
+
+
+
+    let total_revenue = 0;
+    let j = 0;
+
+
 
 
 
@@ -97,16 +68,22 @@ const App = () => {
 
 
 
+    const calculate_total_revenue = (v) => {
+        total_revenue = total_revenue + parseInt(v.v.price)
+        j = j + 1
+
+
+    }
+
+
+
     {
-        count.cart.map(v => brandn.v.toLocaleLowerCase() == v.brandkaname.toLocaleLowerCase() ? calculate_revenue(v) : console.log("other company"))
+        count.cart.map(v => brandn.v.toLocaleLowerCase() == v.brandkaname.toLocaleLowerCase() ? calculate_revenue(v) : calculate_total_revenue(v))
     }
 
 
 
 
-
-    console.log(revenue)
-    console.log(i)
 
     const [form_data, setform_data] = useState({ name: "", price: Number, img: "", brand: brandn.v })
 
@@ -115,10 +92,10 @@ const App = () => {
     const [userdata, setuserdata] = useState({
 
 
-        labels: ["Olivia", "Hemani", "Dell", "grocery"],
+        labels: [`${brandn.v}`, "Others"],
 
         datasets: [{
-            label: "brands", data: [3, 4, 5, 4], backgroundColor: ["rgb(250, 234, 99)", "lightsalmon", "lightgrey", "lightgreen"], barPercentage: 0.5,
+            label: "brands", data: [revenue, total_revenue], backgroundColor: ["rgb(250, 234, 99)", "lightsalmon", "lightgrey", "lightgreen"], barPercentage: 0.5,
             barThickness: 20,
 
             tension: 0.4,
@@ -130,20 +107,46 @@ const App = () => {
 
 
 
+    const [userdata1, setuserdata1] = useState({
+
+
+        labels: [`${brandn.v}`, "Others"],
+
+        datasets: [{
+            label: "brands", data: [brand.products.length, j], backgroundColor:  ["rgb(250, 234, 99)", "lightgreen"], barPercentage: 0.5,
+            barThickness: 20,
+
+            tension: 0.4,
+
+        }]
+    })
+
+
+
+
+    const [userdata2, setuserdata2] = useState({
+
+
+        labels: [`${brandn.v}`, "Others"],
+
+        datasets: [{
+            label: "brands", data: [i, j], backgroundColor: ["#EBBD64", "skyblue"], barPercentage: 0.5,
+            barThickness: 20,
+
+            tension: 0.4,
+
+        }]
+    })
+
+
+
+
     const add_product = () => {
 
 
 
-        const headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': '*'
-        }
 
-
-        // fetch('https://bhaiyya-server.herokuapp.com/register_brand', {
-        fetch('https://emartjs.herokuapp.com/add-prod', {
+        fetch(`${api_url}/add-prod`, {
 
             method: 'POST',
             headers: headers,
@@ -175,9 +178,9 @@ const App = () => {
 
                 <div className="box box-pic">
 
-                   
-                   
-                   <img src={brand.pic} className="pic-fix" />
+
+
+                    <img src={brand.pic} className="pic-fix" />
                 </div>
 
 
@@ -203,6 +206,8 @@ const App = () => {
                 </div>
 
 
+
+
                 <div className="box dosra">
 
                     <span className="sp"><h1 className="dash-main">{brand.products.length}</h1>products</span>
@@ -210,7 +215,7 @@ const App = () => {
 
                         <Pie
                             className="actual_bar"
-                            data={userdata}
+                            data={userdata1}
 
 
 
@@ -230,9 +235,31 @@ const App = () => {
                     <span className="sp"><h1 className="dash-main">{i}</h1> items sold</span>
                     <span className="bp">
 
+                        <PolarArea
+                            className="actual_bar"
+                            data={userdata2}
+
+
+
+                            height='50vh'
+                            width='50vw'
+                            options={{ maintainAspectRatio: false, plugins: { legend: { display: false } } }}
+
+
+                        />
+                    </span>
+                </div>
+
+
+
+                <div className="box chota">
+
+                    <span className="sp"><h1 className="dash-main">{ ((i/j)*100).toFixed(0)} <p className="per_sign">%</p></h1> market share</span>
+                    <span className="bp">
+
                         <Doughnut
                             className="actual_bar"
-                            data={userdata}
+                            data={userdata2}
 
 
 

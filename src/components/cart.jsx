@@ -26,41 +26,7 @@ const App = () => {
 
 
 
-    const google_login = () => {
 
-
-        const provider = new GoogleAuthProvider();
-
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-
-                const user = result.user;
-
-
-                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
-
-                dispatch(current_user(obj))
-
-                localStorage.setItem("delivery-user", JSON.stringify(obj))
-
-
-
-
-
-            }).catch((error) => {
-
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("errorMessage")
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
-    }
-
-
-    // const [logout, setlogout] = useState(false)
 
 
 
@@ -85,7 +51,7 @@ const App = () => {
 
 
 
-            <div className="cartgrid">
+            <div className="cartgrid" style={{osition:"relative"}}>
                 {count.currentUser.cart.map((v, i) => (
 
 
@@ -103,6 +69,9 @@ const App = () => {
                 ))
 
                 }
+
+
+                <button onClick={() => navigate("/payment")} className="btn btn-success" style={{position:"absolute" , bottom:"0%"}}>Proceed to Pay</button>
 
             </div>
 

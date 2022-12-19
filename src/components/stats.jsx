@@ -4,16 +4,13 @@ import "../css/stats.css"
 import { useNavigate } from "react-router-dom"
 
 
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../config/firebase.js";
-import { useState, useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-import { current_user, logout_local } from "../store/counterslice";
 
 
 
 
-import { Bar, Pie, Line, Doughnut, Radar, PolarArea, Scatter, Bubble } from "react-chartjs-2";
+import { Bar, Pie, Line, Doughnut, PolarArea } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 
 import Navbar from "../components/navbar"
@@ -26,9 +23,6 @@ const App = () => {
 
 
     const count = useSelector(state => state.counter)
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
 
 
 
@@ -123,7 +117,7 @@ const App = () => {
 
 
 
-                <span className="tp"><h1 className="main">{count.cart.length}</h1> sales</span>
+                    <span className="tp"><h1 className="main">{count.cart.length}</h1> sales</span>
 
                     <span className="ep">
 
@@ -163,6 +157,7 @@ const App = () => {
 
                     />
                 </div>
+
 
 
 

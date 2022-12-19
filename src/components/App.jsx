@@ -6,10 +6,14 @@ import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { useDispatch } from "react-redux"
-import { load_data } from "../store/counterslice"
 import { useSelector } from "react-redux"
 
 import lottie from "lottie-web"
+
+
+import { load_data, current_user } from "../store/counterslice"
+import { api_url, headers } from "../config/api"
+
 
 
 const App = () => {
@@ -22,6 +26,58 @@ const App = () => {
 
 
 
+    const gett = () => {
+
+
+
+
+        // fetch('https://bhaiyya-server.herokuapp.com/getdata', {
+        fetch(`${api_url}/getdata`, {
+
+            method: 'GET',
+            headers: headers
+
+        })
+            .then((d) => d.json())
+            .then((r) => dispatch(load_data(r[0])))
+
+
+
+
+    }
+
+
+
+
+
+
+    const userExists = () => {
+
+
+
+        var userData = JSON.parse(localStorage.getItem("delivery-user"));
+
+        // console.log(userData)
+        userData ?
+
+
+            dispatch(current_user(userData))
+
+
+
+
+            :
+            console.log("new user hai")
+
+
+
+
+
+
+
+    }
+
+
 
     const container = useRef(null)
     const count = useSelector(state => state.counter)
@@ -30,6 +86,7 @@ const App = () => {
 
 
     useEffect(() => {
+        gett(); userExists(); 
 
 
 
@@ -45,18 +102,57 @@ const App = () => {
 
 
 
-    }, [1]);
+
+    }, [2])
+
+
+    count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("database late")
 
 
 
 
 
-    setTimeout(() => {
-
-        count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("data fetching")
 
 
-    }, 4000);
+
+    // const gett = () => {
+
+    //     const headers = {
+    //         'Content-Type': 'application/json;charset=UTF-8',
+    //         "Access-Control-Allow-Origin": "*",
+    //         'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+    //         'Access-Control-Allow-Headers': '*'
+    //     }
+
+
+    //     // fetch('https://bhaiyya-server.herokuapp.com/getdata', {
+    //     fetch('https://emartjs.herokuapp.com/getdata', {
+
+    //         method: 'GET',
+    //         headers: headers
+
+    //     })
+    //         .then((d) => d.json())
+    //         .then((r) => dispatch(load_data(r[0])))
+
+
+
+    // }
+
+
+
+
+
+
+
+
+
+    // setTimeout(() => {
+
+    // count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("database late")
+
+
+    // }, 2500);
 
 
 

@@ -5,16 +5,19 @@ import { useDispatch, useSelector } from "react-redux"
 import "../css/brandstore.css"
 
 
-import { current_user, logout_local, add_cart } from "../store/counterslice"
+import { current_user, filter_prod, add_cart } from "../store/counterslice"
 
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase.js";
 
 
-import { useState } from "react";
 
 import Navbar from "../components/navbar"
+
+
+import {api_url , headers} from "../config/api"
+
 
 
 
@@ -31,18 +34,18 @@ const App = () => {
 
 
 
+
+
+
+
+
     const add_to_cart = (payload) => {
 
         dispatch(add_cart(payload.v))
 
-        const headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': '*'
-        }
+     
 
-        fetch("https://emartjs.herokuapp.com/add_to_cart", {
+        fetch(`${api_url}/add_to_cart`, {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(payload)
@@ -68,8 +71,12 @@ const App = () => {
     // console.log(brandkaname)
     // console.log(count.cart.length)
 
-    let product = { products: [] }
 
+
+
+
+
+    let product = { products: [] }
     count.brands.map((v) => v.brand.toLowerCase() === brandkaname.toLowerCase() ? product = v : null)
 
 
@@ -77,38 +84,8 @@ const App = () => {
 
 
 
-    const google_login = () => {
 
 
-        const provider = new GoogleAuthProvider();
-
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-
-                const user = result.user;
-
-
-                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
-
-                dispatch(current_user(obj))
-
-                localStorage.setItem("delivery-user", JSON.stringify(obj))
-
-
-
-
-
-            }).catch((error) => {
-
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("errorMessage")
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
-    }
 
 
 
@@ -170,7 +147,7 @@ const App = () => {
 
                         <img src={v.img} className="card-img-product" />
                         <div className="card-img-overlay-product">
-                            <h6 className="card-title-product">{v.name}</h6>
+                            <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>
                             <h6 className='price-product'>Rs. {v.price}</h6>
                             <button className="btn btn-outline-success btn-small" onClick={() => add_to_cart({ v, brandkaname })} >Add</button>
 
@@ -191,7 +168,7 @@ const App = () => {
 
 
 
-        </div>
+        </div >
 
     )
 

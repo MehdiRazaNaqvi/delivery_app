@@ -2,61 +2,18 @@
 
 import "../css/register.css"
 import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux";
-import { current_user, logout_local } from "../store/counterslice"
 
-
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../config/firebase.js";
 
 import Navbar from "../components/navbar"
 
 import { useState } from "react";
 
+
+
+import {api_url , headers} from "../config/api"
+
 const App = () => {
 
-    const count = useSelector(state => state.counter)
-
-
-
-    const dispatch = useDispatch()
-
-
-
-
-
-    const google_login = () => {
-
-
-        const provider = new GoogleAuthProvider();
-
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-
-                const user = result.user;
-
-
-                const obj = { username: user.displayName, photoURL: user.photoURL, uid: user.uid, cart: [] }
-
-                dispatch(current_user(obj))
-
-                localStorage.setItem("delivery-user", JSON.stringify(obj))
-
-
-
-
-
-            }).catch((error) => {
-
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("errorMessage")
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
-    }
 
 
 
@@ -79,16 +36,10 @@ const App = () => {
 
     const register_brand = () => {
 
-        const headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': '*'
-        }
+   
 
 
-        // fetch('https://bhaiyya-server.herokuapp.com/register_brand', {
-        fetch('https://emartjs.herokuapp.com/register_brand', {
+        fetch(`${api_url}/register_brand`, {
 
             method: 'POST',
             headers: headers,
@@ -96,7 +47,8 @@ const App = () => {
 
         })
             .then((d) => d.json())
-            .then((r) => console.log("sent"))
+            .then((r) => console.log(r))
+
 
 
     }
@@ -110,7 +62,7 @@ const App = () => {
 
 
 
-       <Navbar/>
+            <Navbar />
 
 
 

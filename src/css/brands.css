@@ -61,7 +61,7 @@
     justify-content: space-between;
     align-items: center;
 
-    padding-left: 5vw;
+    /* padding-left: 5vw; */
     padding-right: 10vw;
 
     position: fixed;
@@ -74,6 +74,8 @@
 .logoimg {
     width: 7%;
     height: 100%;
+
+    margin-left: 5vw;
 
 
 }
@@ -98,7 +100,8 @@ a {
 .grid {
     width: 100%;
     height: 100%;
-    /* background-color: rgb(255, 0, 0); */
+    max-height: max-content;
+    background-color: rgb(255, 0, 0);
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -107,6 +110,8 @@ a {
     place-items: center;
     padding-top: 10%;
 }
+
+
 
 
 
@@ -253,9 +258,9 @@ a {
 
 
 .logout {
-    width: 100%;
-    height: 20vh;
-    background-color: rgb(255, 255, 255);
+    width: 100vw;
+    height: 25vh;
+
     position: fixed;
     bottom: 0%;
 
@@ -265,11 +270,27 @@ a {
     flex-direction: column;
 
     font-size: small;
-    color: red;
+    color: rgb(255, 255, 255);
     gap: 5%;
-    background-color: rgb(238, 238, 238);
-    /* animation: ; */
+    /* background-color: #20124d; */
+    background-color: rgb(219, 142, 0);
+    animation: animate 0.3s;
 }
+
+
+
+@keyframes animate {
+
+    from {
+        transform: translate(0vw, 100vh);
+    }
+
+    to {
+        transform: translate(0px, 0px);
+    }
+
+}
+
 
 
 
@@ -295,11 +316,90 @@ p {
 
 
 
+
 p:hover {
-    border: 1px solid orange;
-    background-color: white;
+    background-color: rgb(255, 192, 75);
+
+
     color: black;
+
 }
+
+
+
+
+
+.brand-grid {
+
+    width: 100%;
+    height: min-content;
+    /* background-color: yellow; */
+    margin-top: 10rem;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+
+
+    row-gap: 25%;
+
+    /* gap: 1rem; */
+
+    place-items: center;
+
+
+
+}
+
+
+
+
+.brandover {
+    width: 50%;
+    height: 12vh;
+    /* background-color: pink; */
+
+
+
+
+
+}
+
+
+
+
+
+.brand-img {
+    width: 100%;
+    height: 80%;
+
+    border: 0.5px solid rgb(222, 222, 222);
+    border-radius: 0.5rem;
+}
+
+
+
+
+.brand-name {
+    width: 100%;
+    height: 20%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: small;
+    font-weight: 400;
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -333,6 +433,15 @@ p:hover {
 
     .card-title {
         font-size: 60%;
+    }
+
+    .brandover {
+        width: 70%;
+    }
+
+
+    .brand-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
 }
@@ -378,6 +487,45 @@ p:hover {
     .card-title {
         font-size: 45%;
     }
+
+
+    .navbar {
+        padding-right: 5%;
+        height: 8%;
+        background-color: rgb(247, 247, 247);
+    }
+
+    .nav_inner {
+        min-width: 45%;
+        /* background-color: green; */
+    }
+
+
+    .logout {
+        height: 30vh;
+    }
+
+
+
+    .brand-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* grid-template-rows: repeat(2, 1fr); */
+        /* background-color: red; */
+        column-gap: 3%;
+        row-gap: 0%;
+        margin-top: 7rem;
+    }
+
+    .brandover {
+        width: 90%;
+        height: 60%;
+    }
+
+
+    .brand-name {
+        font-size: x-small;
+    }
+
 
 
 }

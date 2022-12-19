@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
-
+import "../css/brands.css"
 
 
 
@@ -49,7 +49,23 @@ const App = () => {
 
                 localStorage.setItem("delivery-user", JSON.stringify(obj))
 
+                const headers = {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "Access-Control-Allow-Origin": "*",
+                    'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+                    'Access-Control-Allow-Headers': '*'
+                }
 
+
+                // fetch("http://localhost:4000/adduser", {
+                fetch('https://emartjs.herokuapp.com/getdata', {
+
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify(obj)
+                })
+                    .then((r) => r.json())
+                    .then(d=> console.log(d))
 
 
 
@@ -120,8 +136,9 @@ const App = () => {
             <div className={logout ? "logout" : "invisible"}>
                 <p onClick={() => navigate("/delivery_app/register")}> Register your Brand </p>
                 <p onClick={() => navigate("/delivery_app/auth")}> Log in as a brand </p>
-                <p onClick={() => { dispatch(logout_local()); setlogout(false) }} > Logout? </p>
+                <p onClick={() => { dispatch(logout_local()); setlogout(false) }} > Logout </p>
             </div>
+
 
         </div>
 

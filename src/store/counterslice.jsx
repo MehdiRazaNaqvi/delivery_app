@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
 // import { database } from "../firebase/firebase";
 
 // import { set, ref, onValue, remove } from 'firebase/database';
-
-
+import { current } from '@reduxjs/toolkit'
 
 
 
@@ -17,22 +17,6 @@ const initialState = {
 
     // { brand: 'Olivia', pic: "https://oliviagreencamping.com/wp-content/uploads/2019/08/olivia_logo-07.png", products: [{ id: 1, name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
 
-    // { brand: 'J', pic: "https://seeklogo.com/images/J/Junaid_jamshed-logo-D0EF421943-seeklogo.com.png", products: [{ id: 2, name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-    // { brand: 'Gul Ahmed', pic: "https://logovectorseek.com/wp-content/uploads/2020/03/gul-ahmed-logo-vector.png", products: [{ id: 3, name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-    // { brand: 'Dalda', pic: "https://climatelaunchpad.org/wp-content/uploads/2019/01/5.png", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-    // { brand: 'Dairy', pic: "http://i2.wp.com/www.dairyproducts.it/eng/wp-content/uploads/2016/05/dairy-products.jpg?fit=1000%2C691", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-    // { brand: 'Grocery', pic: "https://techcrunch.com/wp-content/uploads/2015/03/groceries-e1554037962210.jpg", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-    // { brand: 'Olay', pic: "https://logos-world.net/wp-content/uploads/2020/11/Olay-Symbol.png", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-    // { brand: 'Ponds', pic: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/ac84d025156259.563424319264b.png", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
-
-
-    // { brand: 'Hemani', pic: "https://i.pinimg.com/originals/d3/41/91/d34191d9984fdf9444607026400a08d5.png", products: [{ name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
 
   ]
 
@@ -58,7 +42,12 @@ const initialState = {
 
 
 
-  }
+  },
+
+
+  search: { brandnavi: "", item: {} }
+
+
 }
 
 
@@ -149,12 +138,12 @@ export const counterSlice = createSlice({
 
 
 
-    
+
 
 
 
     add_cart: (state, payload) => {
-
+      // console.log(payload.payload)
       state.currentUser.cart.push(payload.payload)
       localStorage.setItem("delivery-user", JSON.stringify(state.currentUser))
 
@@ -163,10 +152,89 @@ export const counterSlice = createSlice({
 
 
 
+
     logout_local: (state) => {
       localStorage.removeItem("delivery-user")
       state.currentUser = { username: "none", photoURL: "", cart: [] }
-    }
+    },
+
+
+
+
+
+    filter_brand: (state, payload) => {
+
+
+      const search = (v, r) => {
+        // console.log(current(r))
+
+        state.search.brandnavi = v.brand
+        state.search.item = r
+
+
+
+      }
+
+
+
+      state.brands.map(v => v.products.map(r => r.name.toLowerCase() == payload.payload.toLowerCase() ? search(v, r) : console.log("nae hai")))
+
+
+
+    },
+
+
+
+
+
+
+    voice_add_cart: (state, payload) => {
+
+
+
+
+
+
+      const add_to_cart = (v, r) => {
+
+
+        const data = { v: current(r), brandkaname: v.brand }
+
+
+        state.currentUser.cart.push(r)
+        localStorage.setItem("delivery-user", JSON.stringify(state.currentUser))
+
+
+
+        const headers = {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+          'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': '*'
+        }
+
+        fetch("https://emartjs.herokuapp.com/add_to_cart", {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify(data)
+        })
+
+
+
+
+      }
+
+
+
+
+
+      state.brands.map(v => v.products.map(r => r.name.toLowerCase() == payload.payload.toLowerCase() ? add_to_cart(v, r) : console.log("nae hai")))
+
+
+
+    },
+
+
 
 
 
@@ -177,6 +245,7 @@ export const counterSlice = createSlice({
 
 
 
-export const { current_user, load_data, add_cart, logout_local } = counterSlice.actions
+
+export const { current_user, load_data, add_cart, logout_local, filter_brand, voice_add_cart } = counterSlice.actions
 
 export default counterSlice.reducer
