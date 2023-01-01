@@ -1,16 +1,24 @@
 .payment_form {
     width: 100%;
     height: 100vh;
-    background-color: orange;
 
+    /* background-color: orange; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
+    gap: 3rem;
+
 
 }
 
+.fieldset {
+    /* background-color: red; */
+
+    width: 50%;
+    font-size: 2rem;
+}
 
 
 
@@ -51,6 +59,7 @@
 }
 
 
-.payment_label , .payment_input{
+.payment_label,
+.payment_input {
     width: 80%;
 }

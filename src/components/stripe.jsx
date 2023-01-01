@@ -19,6 +19,8 @@ import { Form, Input, FormGroup, FormFeedback, Button } from "reactstrap";
 
 const stripePromise = loadStripe('pk_test_51MGSPSBHamWcZVuTui3e90m1gqmNDh5SPcIkfLqPcJIoGRSBwuAT1hj54pjD5xsA8HbL4jr3DSLhM5Biay2ZjBbK00s3YcMsCM');
 
+
+
 const Wrapper = (props) => (
     <Elements stripe={stripePromise}>
         <App />
@@ -47,26 +49,24 @@ const App = () => {
 
 
     const [userSecret, setUserSecret] = useState('')
-    const [total, set_total] = useState(10000)
+    const [loading, setLoading] = useState(false)
 
 
+    let total = 5000;
+
+
+    const state = useSelector(state => state.counter)
 
 
 
     useEffect(() => {
 
 
+        // state.currentUser?.cart?.map(v => total = (parseInt(v.price) + total))
+        fetchClientSecret()
 
 
-        state.currentUser?.cart?.map(v => set_total(parseInt(v.price) + total))
-
-        console.log(total)
-
-
-
-
-
-
+        // console.log(total)
 
 
     }, [3])
@@ -87,7 +87,7 @@ const App = () => {
                 color: "black",
                 fontWeight: 500,
 
-                fontSize: "16px"
+                fontSize: "20px"
             },
 
             invalid: {
@@ -100,21 +100,23 @@ const App = () => {
 
     }
 
-    const state = useSelector(state => state.counter)
+
+
 
 
     const Confirm_Transaction = async () => {
+
+        setLoading(true)
         await stripe.confirmCardPayment(userSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
         })
-            .then(r => toast.success(`Paid ${r.paymentIntent.amount} ${r.paymentIntent.currency}`))
+            .then(r => { setLoading(false); r.paymentIntent ? toast.success(`Paid ${r.paymentIntent.amount / 100} ${r.paymentIntent.currency}`) : toast.error(r.error?.message) })
+            // .then(r => console.log(r))
             .catch(e => console.log(e))
 
     }
-
-
 
 
 
@@ -134,7 +136,6 @@ const App = () => {
     }
 
 
-    fetchClientSecret()
 
 
 
@@ -142,6 +143,7 @@ const App = () => {
 
 
     return (
+
         <div className="payment_form">
 
 
@@ -160,14 +162,17 @@ const App = () => {
 
             </Form> */}
 
-            <fieldset>
-                <div>
-                    <CardElement options={CARD_OPTIONS} />
-                </div>
+            <fieldset className="fieldset">
+                <CardElement options={CARD_OPTIONS} />
             </fieldset>
 
-            {/* <Button color="success" onClick={() => Confirm_Transaction()}>CONFIRM PAYMENT</Button> */}
+            <Button disabled={loading} color="success" onClick={() => userSecret != '' ? Confirm_Transaction() : toast.info('Please refresh page')}>CONFIRM PAYMENT</Button>
+
+
         </div>
+
+
+
     )
 }
 
