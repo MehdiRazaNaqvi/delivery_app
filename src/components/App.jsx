@@ -51,32 +51,6 @@ const App = () => {
 
 
 
-    const userExists = () => {
-
-
-
-        var userData = JSON.parse(localStorage.getItem("delivery-user"));
-
-        // console.log(userData)
-        userData ?
-
-
-            dispatch(current_user(userData))
-
-
-
-
-            :
-            console.log("new user hai")
-
-
-
-
-
-
-
-    }
-
 
 
     const container = useRef(null)
@@ -84,9 +58,8 @@ const App = () => {
 
 
 
-
     useEffect(() => {
-        gett(); userExists(); 
+        gett();
 
 
 

@@ -1,12 +1,10 @@
 import "../css/cart.css"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { current_user, logout_local } from "../store/counterslice"
+import { remove_from_cart } from "../store/counterslice"
 
 
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../config/firebase.js";
-import { useEffect, useState } from "react";
+
 
 import Navbar from "./navbar"
 
@@ -21,7 +19,7 @@ const App = () => {
 
 
 
-
+    console.log(count.price)
 
 
 
@@ -37,7 +35,7 @@ const App = () => {
 
 
     return (
-        <div className="cartpage">
+        <div style={{ height: "minContent" }} className="cartpage">
 
             <Navbar />
 
@@ -51,7 +49,8 @@ const App = () => {
 
 
 
-            <div className="cartgrid" style={{osition:"relative"}}>
+            <div className="cartgrid" style={{ position: "relative" }}>
+                <h1 style={{ position: "absolute", top: "0%", color: "gray" }}>Rs. {count.price}</h1>
                 {count.currentUser.cart.map((v, i) => (
 
 
@@ -61,7 +60,7 @@ const App = () => {
                         <div className="card-img-overlay-product">
                             <h6 className="card-title-product">{v.name}</h6>
                             <h6 className='price-product'>Rs. {v.price}</h6>
-                            <button className="btn btn-outline-warning btn-small"  >Remove</button>
+                            <button className="btn btn-outline-warning btn-small" onClick={() => dispatch(remove_from_cart({ i, v }))} >Remove</button>
                         </div>
 
                     </div>
@@ -71,7 +70,7 @@ const App = () => {
                 }
 
 
-                <button onClick={() => navigate("/payment")} className="btn btn-success" style={{position:"absolute" , bottom:"0%"}}>Proceed to Pay</button>
+                <button disabled={count.currentUser.cart.length == 0} onClick={() => navigate("/payment")} className="btn btn-success" style={{ position: "absolute", bottom: "0%" }}>Proceed to Pay</button>
 
             </div>
 

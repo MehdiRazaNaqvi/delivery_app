@@ -26,7 +26,7 @@ import { load_data, current_user } from "../store/counterslice"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 
-import {api_url , headers} from "../config/api"
+import { api_url, headers } from "../config/api"
 
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -75,7 +75,7 @@ const App = () => {
 
     const gett = () => {
 
-      
+
 
 
         // fetch('https://bhaiyya-server.herokuapp.com/getdata', {
@@ -116,7 +116,7 @@ const App = () => {
 
     return (
         <div>
-            <ToastContainer/>
+            <ToastContainer />
             <Router>
                 <Routes>
                     <Route path="/delivery_app" element={<Home />} />

@@ -9,12 +9,14 @@ import axios from "axios"
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { api_url, headers } from "../config/api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "../css/stripe.css"
 import { Form, Input, FormGroup, FormFeedback, Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import { amount_paid } from "../store/counterslice";
 
 
 const stripePromise = loadStripe('pk_test_51MGSPSBHamWcZVuTui3e90m1gqmNDh5SPcIkfLqPcJIoGRSBwuAT1hj54pjD5xsA8HbL4jr3DSLhM5Biay2ZjBbK00s3YcMsCM');
@@ -37,7 +39,7 @@ const App = () => {
 
     const stripe = useStripe();
     const elements = useElements();
-
+    const dispatch = useDispatch()
 
 
 
@@ -46,16 +48,18 @@ const App = () => {
 
 
     // const element = useElements()
+    const state = useSelector(state => state.counter)
 
 
     const [userSecret, setUserSecret] = useState('')
     const [loading, setLoading] = useState(false)
+    const [paid, setPaid] = useState(false)
 
 
-    let total = 5000;
+    let total = state.price;
 
 
-    const state = useSelector(state => state.counter)
+
 
 
 
@@ -112,7 +116,7 @@ const App = () => {
                 card: elements.getElement(CardElement)
             }
         })
-            .then(r => { setLoading(false); r.paymentIntent ? toast.success(`Paid ${r.paymentIntent.amount / 100} ${r.paymentIntent.currency}`) : toast.error(r.error?.message) })
+            .then(r => { setLoading(false); setPaid(true); dispatch(amount_paid()); r.paymentIntent ? toast.success(`Paid ${r.paymentIntent.amount / 100} ${r.paymentIntent.currency}`) : toast.error(r.error?.message) })
             // .then(r => console.log(r))
             .catch(e => console.log(e))
 
@@ -138,6 +142,7 @@ const App = () => {
 
 
 
+    const navigate = useNavigate()
 
 
 
@@ -162,12 +167,18 @@ const App = () => {
 
             </Form> */}
 
-            <fieldset className="fieldset">
-                <CardElement options={CARD_OPTIONS} />
-            </fieldset>
+            {!paid &&
+                <fieldset className="fieldset">
+                    <CardElement options={CARD_OPTIONS} />
+                </fieldset>
+            }
+            {
+                !paid ?
+                    <Button disabled={loading} color="success" onClick={() => userSecret != '' ? Confirm_Transaction() : toast.info('Please refresh page')}>PAY NOW</Button>
+                    :
+                    <Button color="success" onClick={() => navigate("/delivery_app/brands")}>Back to Home</Button>
 
-            <Button disabled={loading} color="success" onClick={() => userSecret != '' ? Confirm_Transaction() : toast.info('Please refresh page')}>CONFIRM PAYMENT</Button>
-
+            }
 
         </div>
 

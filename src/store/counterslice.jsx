@@ -13,6 +13,8 @@ const initialState = {
   currentUser: { username: "none", photoURL: "", cart: [] }
   ,
 
+  price: 0,
+
   brands: [
 
     // { brand: 'Olivia', pic: "https://oliviagreencamping.com/wp-content/uploads/2019/08/olivia_logo-07.png", products: [{ id: 1, name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "Moisturiser", price: "1000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "fairness creame", price: "2000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }, { name: "serum", price: "10000", img: "https://www.oliviacosmetics.net/web/files/2809766a93c111e89c8a124d46038552/7e29a018101b11ea9b7e0242b290a65e" }] },
@@ -67,13 +69,15 @@ export const counterSlice = createSlice({
 
     current_user: (state, payload) => {
 
-      state.currentUser = payload.payload
-      // console.log(payload.payload)
+      state.currentUser.photoURL = payload.payload.photoURL
+      state.currentUser.uid = payload.payload.uid
+      state.currentUser.username = payload.payload.username
 
 
-    }
+    },
 
-    ,
+
+
 
 
 
@@ -140,12 +144,12 @@ export const counterSlice = createSlice({
 
 
 
-
-
     add_cart: (state, payload) => {
       // console.log(payload.payload)
       state.currentUser.cart.push(payload.payload)
-      localStorage.setItem("delivery-user", JSON.stringify(state.currentUser))
+      state.price = state.price + parseInt(payload.payload.price)
+
+      // localStorage.setItem("delivery-user", JSON.stringify(state.currentUser))
 
     },
 
@@ -162,11 +166,11 @@ export const counterSlice = createSlice({
 
 
 
+
     filter_brand: (state, payload) => {
 
 
       const search = (v, r) => {
-        // console.log(current(r))
 
         state.search.brandnavi = v.brand
         state.search.item = r
@@ -237,6 +241,23 @@ export const counterSlice = createSlice({
 
 
 
+    remove_from_cart: (state, payload) => {
+      state.currentUser.cart = state.currentUser.cart.filter((v, i) => i != payload.payload.i)
+      state.price = state.price - payload.payload.v.price
+      // state.price = 0
+
+    },
+
+
+
+
+
+    amount_paid: (state, payload) => {
+  
+      state.price = 0
+      state.currentUser.cart = []
+
+    },
 
 
   },
@@ -246,6 +267,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { current_user, load_data, add_cart, logout_local, filter_brand, voice_add_cart } = counterSlice.actions
+export const { current_user, load_data, add_cart, logout_local, filter_brand, voice_add_cart, remove_from_cart , amount_paid} = counterSlice.actions
 
 export default counterSlice.reducer
