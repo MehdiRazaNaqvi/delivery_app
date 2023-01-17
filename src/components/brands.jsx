@@ -23,6 +23,7 @@ import { auth } from "../config/firebase.js";
 
 import Gif from "./skins/gif.gif"
 import Navbar from "../components/navbar"
+import { api_url } from "../config/api"
 
 
 
@@ -201,49 +202,7 @@ const App = () => {
         <div className="storespage">
 
 
-            {/* 
-            <div className="navbar" >
 
-
-                <img className="logoimg" onClick={() => navigate("/delivery_app")} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" />
-
-
-                <span className="nav_inner" >
-
-                    <div className="small_nav_img_box">
-                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/favorite-cart.png" onClick={() => navigate("/delivery_app/cart")} className="cart_img" />  <span className="cartlen" >{count.currentUser.cart.length} </span>
-                    </div>
-
-
-
-                    <div className="small_nav_img_box">
-                        <img src="https://img.icons8.com/fluency-systems-regular/48/000000/laptop-metrics.png" onClick={() => navigate("/delivery_app/stats")} className="cart_img" />
-                    </div>
-
-
-
-
-
-
-                    {count.currentUser.username == "none" ?
-
-                        <div onClick={() => google_login()} className="small_nav_img_box">
-                            <img referrerPolicy="no-referrer" className="small_nav_img" src="https://img.icons8.com/material-outlined/24/000000/user--v1.png" />
-                        </div>
-
-
-
-                        :
-
-                        <div className="small_nav_img_box">
-                            <img referrerPolicy="no-referrer" onClick={() => setlogout(!logout)} className="small_nav_img" src={count.currentUser.photoURL} />
-                        </div>
-
-                    }
-                </span>
-
-
-            </div> */}
 
             <Navbar />
 
@@ -255,7 +214,8 @@ const App = () => {
             {count.brands.length < 1 ?
 
                 <div ref={container} className="anim">
-                    <img src={Gif} className="gif" />
+                    {/* <img src={Gif} className="gif" /> */}
+                    No Brands to Show
                 </div>
 
 
@@ -268,26 +228,12 @@ const App = () => {
 
                     {store.map((v, i) => (
 
-                        // <div key={i} onClick={() => navigate(`/delivery_app/brands/${v.brand}`)} className="card" >
 
 
 
+                        <div key={i} onClick={() => navigate(`/delivery_app/brands/${v._id}`)} className="brandover">
 
-
-                        //     <div className="card-img-overlay">
-
-                        //         <h6 className="card-title">{v.brand}</h6>
-
-                        //     </div>
-
-                        // </div>
-
-
-
-
-                        <div key={i} onClick={() => navigate(`/delivery_app/brands/${v.brand}`)} className="brandover">
-
-                            <img className="brand-img" src={v.pic} />
+                            <img className="brand-img" src={`${api_url}/images/${v.pic}`} />
                             <p className="brand-name">{v.brand}</p>
 
 

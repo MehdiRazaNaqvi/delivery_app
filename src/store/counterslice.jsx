@@ -108,8 +108,8 @@ export const counterSlice = createSlice({
       state.brands.map(v => brands_prod.push(v.products.length))
       state.brands.map(v => brands_names.push(v.brand))
 
-      state.cart.map(v => { sales_names.push(v.v.name); })
-      state.cart.map(v => sales_num.push(1))
+      state.cart?.map(v => { sales_names.push(v.v.name); })
+      state.cart?.map(v => sales_num.push(1))
 
 
       state.users.map(v => users_num.push(1))
@@ -145,11 +145,9 @@ export const counterSlice = createSlice({
 
 
     add_cart: (state, payload) => {
-      // console.log(payload.payload)
+
       state.currentUser.cart.push(payload.payload)
       state.price = state.price + parseInt(payload.payload.price)
-
-      // localStorage.setItem("delivery-user", JSON.stringify(state.currentUser))
 
     },
 

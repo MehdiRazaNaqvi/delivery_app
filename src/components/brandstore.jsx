@@ -16,7 +16,8 @@ import { auth } from "../config/firebase.js";
 import Navbar from "../components/navbar"
 
 
-import {api_url , headers} from "../config/api"
+import { api_url, headers } from "../config/api"
+import { toast } from "react-toastify";
 
 
 
@@ -43,14 +44,14 @@ const App = () => {
 
         dispatch(add_cart(payload.v))
 
-     
+
 
         fetch(`${api_url}/add_to_cart`, {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(payload)
         })
-            .then(r => alert("cart updated"))
+            .then(r => toast.success("Added"))
 
 
 
@@ -61,23 +62,16 @@ const App = () => {
 
 
     const d = useParams();
-
-    const brandkaname = d.brandname
+    const brandId = d.brandId
 
 
     const count = useSelector(state => state.counter)
 
 
-    // console.log(brandkaname)
-    // console.log(count.cart.length)
-
-
-
-
-
-
     let product = { products: [] }
-    count.brands.map((v) => v.brand.toLowerCase() === brandkaname.toLowerCase() ? product = v : null)
+
+    count.brands.map((v) => v._id == brandId ? product = v : null)
+
 
 
 
@@ -107,7 +101,7 @@ const App = () => {
 
                 <div className="pic_div">
 
-                    <img className="main_img" src={product.pic} />
+                    <img className="main_img" src={`${api_url}/images/${product.pic}`} />
 
                 </div>
 
@@ -127,35 +121,41 @@ const App = () => {
 
 
 
+            {product.products?.length > 0 ?
 
-            <div className="profile_l">
+                <div className="profile_l">
 
-                {product.products.map((v, i) => (
+                    {product.products.map((v, i) => (
 
 
-                    <div key={i} className="card-product">
+                        <div key={i} className="card-product">
 
-                        <img src={v.img} className="card-img-product" />
-                        <div className="card-img-overlay-product">
-                            <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>
-                            <h6 className='price-product'>Rs. {v.price}</h6>
-                            <button className="btn btn-outline-success btn-small" onClick={() => add_to_cart({ v, brandkaname })} >Add</button>
+                            <img src={v.img} className="card-img-product" />
+
+                            <div className="card-img-overlay-product">
+                                <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>
+                                <h6 className='price-product'>Rs. {v.price}</h6>
+                                <button className="btn btn-outline-success btn-small" onClick={() => add_to_cart({ v, brandId })} >Add</button>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                    ))
 
-                ))
-
-                }
+                    }
 
 
-            </div>
+                </div>
 
 
+                :
 
 
+                <div style={{ marginTop: "5rem", textAlign: "center", color: "gray", fontSize: "1rem", fontWeight: 500 }}>No Products to Show</div>
 
+
+            }
 
 
         </div >

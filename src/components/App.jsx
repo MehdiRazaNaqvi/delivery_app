@@ -30,6 +30,11 @@ const App = () => {
 
 
 
+        const ready = (r) => {
+            navigate("/delivery_app/brands");
+            dispatch(load_data(r[0]))
+        }
+
 
         // fetch('https://bhaiyya-server.herokuapp.com/getdata', {
         fetch(`${api_url}/getdata`, {
@@ -39,7 +44,7 @@ const App = () => {
 
         })
             .then((d) => d.json())
-            .then((r) => dispatch(load_data(r[0])))
+            .then((r) => ready(r))
 
 
 
@@ -79,7 +84,6 @@ const App = () => {
     }, [2])
 
 
-    count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("database late")
 
 
 
@@ -120,21 +124,6 @@ const App = () => {
 
 
 
-    // setTimeout(() => {
-
-    // count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("database late")
-
-
-    // }, 2500);
-
-
-
-    {
-
-        // count.brands.length > 1 ? navigate("/delivery_app/brands") : console.log("data fetching")
-    }
-
-
 
     return (
         <div className="homescreen" >
@@ -157,9 +146,7 @@ const App = () => {
 
 
 
-                {/* <span className="btn_span" >
-                    <button className="btn_normal btn btn-outline-dark">Join Us</button>
-                </span> */}
+             
 
             </div>
 

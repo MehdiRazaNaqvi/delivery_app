@@ -13,6 +13,9 @@ import { load_data } from "../store/counterslice";
 import { api_url, headers } from "../config/api"
 import { toast } from "react-toastify";
 import { Spinner } from "reactstrap";
+import { useRef } from "react";
+import { update } from "firebase/database";
+
 const App = () => {
 
 
@@ -35,6 +38,8 @@ const App = () => {
     const [loading, setLoading] = useState(false)
 
 
+    const inputFile = useRef(null)
+
 
     const register_brand = () => {
 
@@ -56,6 +61,54 @@ const App = () => {
 
     }
 
+
+
+
+
+    const uploadMedia = ({ data }) => {
+
+
+
+
+
+
+        fetch(`${api_url}/uploadFile`, {
+
+            method: 'POST',
+            // headers: headers,
+            body: data
+
+        })
+
+
+            .then((d) => d.json())
+            .then((r) => r.type == "success" && setregister_data({ ...register_data, pic: r.data }))
+
+            .catch(err => console.log(err))
+
+
+
+    }
+
+
+
+
+
+    const send_pic = (e) => {
+
+        e.preventDefault()
+
+        const file = e.target.files[0];
+
+
+        const formData = new FormData
+
+        formData.append("file", file)
+
+
+        uploadMedia({ data: formData })
+
+    }
 
 
 
@@ -97,8 +150,13 @@ const App = () => {
 
                 <div className="left">
 
-                    <input type="text" className="form-control" placeholder="Enter store name" onChange={(e) => setregister_data({ ...register_data, brand: e.target.value })} /><input type="text" className="form-control" placeholder="Enter store logo img url" onChange={(e) => setregister_data({ ...register_data, pic: e.target.value })} /><input type="text" onChange={(e) => setregister_data({ ...register_data, password: e.target.value })} placeholder="Set password" className="form-control" />
+                    <input type="text" className="form-control" placeholder="Enter store name" onChange={(e) => setregister_data({ ...register_data, brand: e.target.value })} />
+                    {/* <input type="text" className="form-control" placeholder="Enter store logo img url" onChange={(e) => setregister_data({ ...register_data, pic: e.target.value })} /> */}
+                    <input className="form-control" onChange={(e) => send_pic(e)} type='file' id='file' ref={inputFile} />
+                    <input type="text" onChange={(e) => setregister_data({ ...register_data, password: e.target.value })} placeholder="Set password" className="form-control" />
+
                     <button onClick={() => { register_brand() }} className="btn btn-warning">{loading ? <Spinner color="light" size="sm" animation="border"></Spinner> : "Register"}</button>
+
                 </div>
 
 

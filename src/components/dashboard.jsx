@@ -14,6 +14,7 @@ import { Bar, Pie, Line, Doughnut, Radar, PolarArea, Scatter, Bubble } from "rea
 import Chart from 'chart.js/auto';
 import { api_url, headers } from "../config/api"
 import { toast } from "react-toastify";
+import { load_data } from "../store/counterslice";
 
 
 
@@ -45,7 +46,8 @@ const App = () => {
 
     let brand = { products: [] }
 
-    count.brands.map((v) => v.brand.toLowerCase() === brandn.v.toLowerCase() ? brand = v : null)
+    count.brands.map((v) => v._id === brandn.v ? brand = v : null)
+
 
 
 
@@ -79,18 +81,19 @@ const App = () => {
 
 
     {
-        count.cart.map(v => brandn.v.toLocaleLowerCase() == v.brandkaname.toLocaleLowerCase() ? calculate_revenue(v) : calculate_total_revenue(v))
+        count.cart.map(v => brandn.v == v.brandId ? calculate_revenue(v) : calculate_total_revenue(v))
     }
 
 
 
     const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
 
 
 
     const [form_data, setform_data] = useState({ name: "", price: Number, img: "", brand: brandn.v })
 
-
+console.log(form_data)
 
     const [userdata, setuserdata] = useState({
 
@@ -125,8 +128,6 @@ const App = () => {
     })
 
 
-
-
     const [userdata2, setuserdata2] = useState({
 
 
@@ -142,15 +143,42 @@ const App = () => {
     })
 
 
-    const product_added = () => {
-        setLoading(false)
-        toast.success("Product Added", {
-            position: toast.POSITION.TOP_CENTER
-        });
 
-        setform_data({ name: "", price: Number, img: "", brand: brandn.v })
+
+    const gett = () => {
+
+
+
+        const ready = (r) => {
+            setLoading(false)
+            dispatch(load_data(r[0]))
+
+            toast.success("Product Added", {
+                position: toast.POSITION.TOP_CENTER
+            });
+
+            setform_data({ name: "", price: Number, img: "", brand: brandn.v })
+
+
+
+        }
+
+
+        // fetch('https://bhaiyya-server.herokuapp.com/getdata', {
+        fetch(`${api_url}/getdata`, {
+
+            method: 'GET',
+            headers: headers
+
+        })
+            .then((d) => d.json())
+            .then((r) => ready(r))
+
+
+
 
     }
+
 
 
     const add_product = () => {
@@ -166,7 +194,7 @@ const App = () => {
 
         })
             .then((d) => d.json())
-            .then((s) => s.type == "success" ? product_added() : toast.error("Something went wrong"))
+            .then((s) => s.type == "success" ? gett() : toast.error("Something went wrong"))
             .catch((err) => toast.error("Network Problem"))
 
 
@@ -313,6 +341,32 @@ const App = () => {
 
             </div>
 
+
+
+            <div className="profile_l">
+
+                {brand.products.map((v, i) => (
+
+
+                    <div key={i} className="card-product">
+
+                        <img src={v.img} className="card-img-product" />
+
+                        <div className="card-img-overlay-product">
+                            <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>
+                            <h6 className='price-product'>Rs. {v.price}</h6>
+                            <button className="btn btn-outline-dark btn-small" >Remove</button>
+
+                        </div>
+
+                    </div>
+
+                ))
+
+                }
+
+
+            </div>
 
 
 

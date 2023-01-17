@@ -27,7 +27,7 @@ const App = () => {
     const authenticate = () => {
 
 
-        count.brands.map(v => v.brand.toLowerCase() == authen.name.toLowerCase() ? v.password.toLowerCase() == authen.password.toLowerCase() ? navigate(`/delivery_app/brand-dashboard/${v.brand}`) : toast.error("Wrong Password", { position: toast.POSITION.TOP_CENTER }) : null)
+        count.brands.map(v => v.brand.toLowerCase() == authen.name.toLowerCase() ? v.password.toLowerCase() == authen.password.toLowerCase() ? navigate(`/delivery_app/brand-dashboard/${v._id}`) : toast.error("Wrong Password", { position: toast.POSITION.TOP_CENTER }) : null)
 
 
 
@@ -64,12 +64,10 @@ const App = () => {
 
 
 
-
-
     return (
 
 
-        count.brands.length > 1 ?
+        count.brands.length > 0 ?
 
 
             <div className="auth_base">
@@ -91,9 +89,8 @@ const App = () => {
             :
 
 
-            <div className="auth_base">
-                <h6>Refresh the page</h6>
-            </div>
+            <div style={{ marginTop: "50%", textAlign: "center", color: "gray", fontSize: "1rem", fontWeight: 500 }}>Looks like there's no Brand right now!</div>
+
 
 
     )
