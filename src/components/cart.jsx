@@ -10,6 +10,7 @@ import Navbar from "./navbar"
 
 
 const App = () => {
+    
     const count = useSelector(state => state.counter)
 
 

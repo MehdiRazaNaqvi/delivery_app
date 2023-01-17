@@ -144,7 +144,9 @@ const App = () => {
 
     const product_added = () => {
         setLoading(false)
-        toast.success("Product Added");
+        toast.success("Product Added", {
+            position: toast.POSITION.TOP_CENTER
+        });
 
         setform_data({ name: "", price: Number, img: "", brand: brandn.v })
 
@@ -305,7 +307,7 @@ const App = () => {
                     <input value={form_data.name} required type="text" placeholder="Product name" onChange={(e) => setform_data({ ...form_data, name: e.target.value })} className="form-control" />
                     <input value={form_data.price} required type="text" placeholder="Price" onChange={(e) => setform_data({ ...form_data, price: e.target.value })} className="form-control" />
                     <input value={form_data.img} required placeholder="Image url" onChange={(e) => setform_data({ ...form_data, img: e.target.value })} type="text" className="form-control" />
-                    <button className="btn btn-primary add-btn" type="submit">Add Product {loading && <Spinner size="sm" animation="border"></Spinner>}</button>
+                    <button className="btn btn-primary add-btn" type="submit">{loading ? <Spinner color="light" size="sm" animation="border"></Spinner> : "Add Product"} </button>
 
                 </form>
 

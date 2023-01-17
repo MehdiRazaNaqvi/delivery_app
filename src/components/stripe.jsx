@@ -116,7 +116,7 @@ const App = () => {
                 card: elements.getElement(CardElement)
             }
         })
-            .then(r => { setLoading(false); setPaid(true); dispatch(amount_paid()); r.paymentIntent ? toast.success(`Paid ${r.paymentIntent.amount / 100} ${r.paymentIntent.currency}`) : toast.error(r.error?.message) })
+            .then(r => { setLoading(false); setPaid(true); dispatch(amount_paid()); r.paymentIntent ? toast.success(`Paid ${r.paymentIntent.amount / 100} ${r.paymentIntent.currency}`, { position: toast.POSITION.TOP_CENTER }) : toast.error(r.error?.message) })
             // .then(r => console.log(r))
             .catch(e => console.log(e))
 

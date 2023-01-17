@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/navbar"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 
 
@@ -27,7 +27,7 @@ const App = () => {
     const authenticate = () => {
 
 
-        count.brands.map(v => v.brand.toLowerCase() == authen.name.toLowerCase() ? v.password.toLowerCase() == authen.password.toLowerCase() ? navigate(`/delivery_app/brand-dashboard/${v.brand}`) : toast.error("Wrong Password") : null)
+        count.brands.map(v => v.brand.toLowerCase() == authen.name.toLowerCase() ? v.password.toLowerCase() == authen.password.toLowerCase() ? navigate(`/delivery_app/brand-dashboard/${v.brand}`) : toast.error("Wrong Password", { position: toast.POSITION.TOP_CENTER }) : null)
 
 
 
@@ -74,7 +74,6 @@ const App = () => {
 
             <div className="auth_base">
 
-                <ToastContainer />
 
 
                 <Navbar />

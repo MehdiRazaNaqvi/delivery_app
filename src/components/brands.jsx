@@ -98,95 +98,89 @@ const App = () => {
 
 
 
+        // function updateScreen(time) {
+
+        //     alanBtn({
+
+        //         key: "c6eb400ab872978fad3b004399eccbd82e956eca572e1d8b807a3e2338fdd0dc/stage",
+
+        //         onCommand: (commandData) => {
+
+        //             if (commandData.command === "voice_add_cart") {
+
+        //                 // console.log(product)
+
+
+        //                 dispatch(voice_add_cart(commandData.data))
+
+
+
+        //             }
+
+
+        //             if (commandData.command === "filter-brand") {
+
+        //                 // console.log(product)
+
+
+        //                 dispatch(filter_brand(commandData.data))
+
+
+
+        //             }
+
+
+        //             if (commandData.command === "cart") {
+        //                 // console.log("cart dekhna chahrha")
+
+        //                 navigate("/delivery_app/cart")
+        //             }
+
+
+
+        //             if (commandData.command === "stats") {
+        //                 // console.log("cart dekhna chahrha")
+
+        //                 navigate("/delivery_app/stats")
+        //             }
+
+
+
+
+        //             if (commandData.command === "brand-login") {
+        //                 // console.log("cart dekhna chahrha")
+
+        //                 navigate("/delivery_app/auth")
+        //             }
+
+
+        //             if (commandData.command === "register-brand") {
+        //                 // console.log("cart dekhna chahrha")
+
+        //                 navigate("/delivery_app/register")
+        //             }
+
+
+
+        //             if (commandData.command === "google-login") {
+        //                 // console.log("cart dekhna chahrha")
+
+        //                 google_login()
+        //             }
 
 
 
 
 
-
-        function updateScreen(time) {
-
-            alanBtn({
-
-                key: "c6eb400ab872978fad3b004399eccbd82e956eca572e1d8b807a3e2338fdd0dc/stage",
-
-                onCommand: (commandData) => {
-
-                    if (commandData.command === "voice_add_cart") {
-
-                        // console.log(product)
-
-
-                        dispatch(voice_add_cart(commandData.data))
-
-
-
-                    }
-
-
-                    if (commandData.command === "filter-brand") {
-
-                        // console.log(product)
-
-
-                        dispatch(filter_brand(commandData.data))
-
-
-
-                    }
-
-
-                    if (commandData.command === "cart") {
-                        // console.log("cart dekhna chahrha")
-
-                        navigate("/delivery_app/cart")
-                    }
-
-
-
-                    if (commandData.command === "stats") {
-                        // console.log("cart dekhna chahrha")
-
-                        navigate("/delivery_app/stats")
-                    }
-
-
-
-
-                    if (commandData.command === "brand-login") {
-                        // console.log("cart dekhna chahrha")
-
-                        navigate("/delivery_app/auth")
-                    }
-
-
-                    if (commandData.command === "register-brand") {
-                        // console.log("cart dekhna chahrha")
-
-                        navigate("/delivery_app/register")
-                    }
-
-
-
-                    if (commandData.command === "google-login") {
-                        // console.log("cart dekhna chahrha")
-
-                        google_login()
-                    }
+        //         }
+        //     })
+        // }
 
 
 
 
 
-                }
-            })
-        }
-
-
-
-
-
-        requestAnimationFrame(updateScreen);
+        // requestAnimationFrame(updateScreen);
     }, [])
 
 
