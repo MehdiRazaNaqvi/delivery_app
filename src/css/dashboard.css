@@ -99,7 +99,12 @@
 
 .add-btn {
     width: 25%;
-    font-size: x-small;
+    font-size: small;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
 }
 
 

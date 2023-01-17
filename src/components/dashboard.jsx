@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-
+import { Spinner } from "reactstrap";
 
 
 
@@ -12,7 +12,8 @@ import Navbar from "../components/navbar"
 
 import { Bar, Pie, Line, Doughnut, Radar, PolarArea, Scatter, Bubble } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
-import {api_url , headers} from "../config/api"
+import { api_url, headers } from "../config/api"
+import { toast } from "react-toastify";
 
 
 
@@ -83,6 +84,8 @@ const App = () => {
 
 
 
+    const [loading, setLoading] = useState(false)
+
 
 
     const [form_data, setform_data] = useState({ name: "", price: Number, img: "", brand: brandn.v })
@@ -113,7 +116,7 @@ const App = () => {
         labels: [`${brandn.v}`, "Others"],
 
         datasets: [{
-            label: "brands", data: [brand.products.length, j], backgroundColor:  ["rgb(250, 234, 99)", "lightgreen"], barPercentage: 0.5,
+            label: "brands", data: [brand.products.length, j], backgroundColor: ["rgb(250, 234, 99)", "lightgreen"], barPercentage: 0.5,
             barThickness: 20,
 
             tension: 0.4,
@@ -139,12 +142,19 @@ const App = () => {
     })
 
 
+    const product_added = () => {
+        setLoading(false)
+        toast.success("Product Added");
+
+        setform_data({ name: "", price: Number, img: "", brand: brandn.v })
+
+    }
 
 
     const add_product = () => {
 
 
-
+        setLoading(true)
 
         fetch(`${api_url}/add-prod`, {
 
@@ -153,7 +163,11 @@ const App = () => {
             body: JSON.stringify(form_data)
 
         })
-            .then((d) => alert("Added"))
+            .then((d) => d.json())
+            .then((s) => s.type == "success" ? product_added() : toast.error("Something went wrong"))
+            .catch((err) => toast.error("Network Problem"))
+
+
 
 
 
@@ -254,7 +268,7 @@ const App = () => {
 
                 <div className="box chota">
 
-                    <span className="sp"><h1 className="dash-main">{ ((i/j)*100).toFixed(0)} <p className="per_sign">%</p></h1> market share</span>
+                    <span className="sp"><h1 className="dash-main">{((i / j) * 100).toFixed(0)} <p className="per_sign">%</p></h1> market share</span>
                     <span className="bp">
 
                         <Doughnut
@@ -286,10 +300,14 @@ const App = () => {
 
                 <h6>Add your product</h6>
 
-                <input type="text" placeholder="Product name" onChange={(e) => setform_data({ ...form_data, name: e.target.value })} className="form-control" />
-                <input type="text" placeholder="Price" onChange={(e) => setform_data({ ...form_data, price: e.target.value })} className="form-control" />
-                <input placeholder="Image url" onChange={(e) => setform_data({ ...form_data, img: e.target.value })} type="text" className="form-control" />
-                <button className="btn btn-primary add-btn" onClick={() => add_product()}>Add Product</button>
+                <form style={{ "margin": "0%", "padding": "0%", "width": "100%", "display": "flex", "flexDirection": "column", "alignItems": "center", "gap": "1.5rem" }} action="" onSubmit={(e) => { e.preventDefault(); add_product() }}>
+
+                    <input value={form_data.name} required type="text" placeholder="Product name" onChange={(e) => setform_data({ ...form_data, name: e.target.value })} className="form-control" />
+                    <input value={form_data.price} required type="text" placeholder="Price" onChange={(e) => setform_data({ ...form_data, price: e.target.value })} className="form-control" />
+                    <input value={form_data.img} required placeholder="Image url" onChange={(e) => setform_data({ ...form_data, img: e.target.value })} type="text" className="form-control" />
+                    <button className="btn btn-primary add-btn" type="submit">Add Product {loading && <Spinner size="sm" animation="border"></Spinner>}</button>
+
+                </form>
 
             </div>
 

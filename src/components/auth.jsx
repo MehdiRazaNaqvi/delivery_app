@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/navbar"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -25,7 +27,7 @@ const App = () => {
     const authenticate = () => {
 
 
-        count.brands.map(v => v.brand.toLowerCase() == authen.name.toLowerCase() ? v.password.toLowerCase() == authen.password.toLowerCase() ? navigate(`/delivery_app/brand-dashboard/${v.brand}`) : alert("Wrong Password") : null)
+        count.brands.map(v => v.brand.toLowerCase() == authen.name.toLowerCase() ? v.password.toLowerCase() == authen.password.toLowerCase() ? navigate(`/delivery_app/brand-dashboard/${v.brand}`) : toast.error("Wrong Password") : null)
 
 
 
@@ -72,14 +74,18 @@ const App = () => {
 
             <div className="auth_base">
 
+                <ToastContainer />
+
 
                 <Navbar />
 
 
                 <div className="back">
-                    <input type="text" placeholder="Brand name" className="form-control" onChange={(e) => setauthen({ ...authen, name: e.target.value })} />
-                    <input type="text" placeholder="Password" className="form-control" onChange={(e) => setauthen({ ...authen, password: e.target.value })} />
-                    <button className="btn btn-primary register-btn" onClick={() => authenticate()}>Go</button>
+                    <form style={{ "margin": "0%", "padding": "0%", "width": "100%", "display": "flex", "flexDirection": "column", "alignItems": "center", "gap": "1.5rem" }} action="" onSubmit={(e) => { e.preventDefault(); authenticate() }}>
+                        <input required type="text" placeholder="Brand name" className="form-control" onChange={(e) => setauthen({ ...authen, name: e.target.value })} />
+                        <input required type="text" placeholder="Password" className="form-control" onChange={(e) => setauthen({ ...authen, password: e.target.value })} />
+                        <button type="submit" className="btn btn-primary register-btn">Go</button>
+                    </form>
                 </div>
             </div>
 

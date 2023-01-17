@@ -10,7 +10,7 @@ import { useState } from "react";
 
 
 
-import {api_url , headers} from "../config/api"
+import { api_url, headers } from "../config/api"
 
 const App = () => {
 
@@ -36,7 +36,7 @@ const App = () => {
 
     const register_brand = () => {
 
-   
+
 
 
         fetch(`${api_url}/register_brand`, {
@@ -72,7 +72,7 @@ const App = () => {
                 <div className="left">
 
                     <input type="text" className="form-control" placeholder="Enter store name" onChange={(e) => setregister_data({ ...register_data, brand: e.target.value })} /><input type="text" className="form-control" placeholder="Enter store logo img url" onChange={(e) => setregister_data({ ...register_data, pic: e.target.value })} /><input type="text" onChange={(e) => setregister_data({ ...register_data, password: e.target.value })} placeholder="Set password" className="form-control" />
-                    <button onClick={() => { register_brand(); navigate("/delivery_app/brands") }} className="btn btn-warning register-btn">Register</button>
+                    <button onClick={() => { register_brand(); navigate("/delivery_app/brands") }} className="btn btn-warning">Register</button>
                 </div>
 
 

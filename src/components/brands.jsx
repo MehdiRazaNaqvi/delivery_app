@@ -2,7 +2,7 @@ import "../css/brands.css"
 import { useNavigate } from "react-router-dom"
 
 
-
+import { Badge } from "reactstrap"
 import alanBtn from "@alan-ai/alan-sdk-web"
 import { filter_brand, current_user, voice_add_cart } from "../store/counterslice"
 
@@ -292,8 +292,11 @@ const App = () => {
 
 
                         <div key={i} onClick={() => navigate(`/delivery_app/brands/${v.brand}`)} className="brandover">
+
                             <img className="brand-img" src={v.pic} />
                             <p className="brand-name">{v.brand}</p>
+
+
 
                         </div>
 

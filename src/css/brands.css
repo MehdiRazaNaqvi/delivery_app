@@ -317,9 +317,10 @@ p {
 
 
 
-p:hover {
-    background-color: rgb(255, 192, 75);
+.brandover:hover p {
+    /* background-color: rgb(255, 192, 75); */
 
+    font-size: 2rem;
 
     color: black;
 
@@ -333,18 +334,17 @@ p:hover {
 
     width: 100%;
     height: min-content;
-    /* background-color: yellow; */
+
     margin-top: 10rem;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    /* grid-template-rows: repeat(3, 1fr); */
 
 
 
-    row-gap: 25%;
+    row-gap: 5rem;
 
-    /* gap: 1rem; */
 
     place-items: center;
 
@@ -356,26 +356,49 @@ p:hover {
 
 
 .brandover {
-    width: 50%;
-    height: 12vh;
-    /* background-color: pink; */
+    width: 75%;
+    height: 20rem;
 
 
 
+    border: 1px solid lightgray;
+    border-radius: 3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    /* background-color: black; */
+    background-image: radial-gradient(rgb(255, 219, 152) 10%, transparent 11%),
+        radial-gradient(lightgreen 10%, transparent 11%);
+
+    background-size: 40px 40px;
+    background-position: 0 0, 30px 30px;
+    background-repeat: repeat;
+
+}
+
+
+.bagde {
+    background-color: orange !important;
+
+    height: 10rem;
 
 
 }
 
 
-
-
-
 .brand-img {
-    width: 100%;
-    height: 80%;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
 
     border: 0.5px solid rgb(222, 222, 222);
-    border-radius: 0.5rem;
+
+    /* border: 1px solid lightgreen; */
+    background-image: none;
+
 }
 
 
@@ -389,8 +412,8 @@ p:hover {
     align-items: center;
     justify-content: center;
 
-    font-size: small;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 600;
 
 }
 
