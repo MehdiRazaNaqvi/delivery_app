@@ -108,9 +108,9 @@ const App = () => {
 
                 <div className="details_div">
 
-                    <h2>{product.brand}</h2>
+                    <h2 style={{ fontSize: "6rem" }} className="card-title-product">{product.brand}</h2>
                     <h6>established 5 years ago</h6>
-                    <h6>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, vel quam. Cum dicta ratione, natus ad ut explicabo perferendis assumenda veritatis itaque! Nesciunt fuga obcaecati voluptatem praesentium, laborum atque unde.</h6>
+                    <h6 style={{ width:"85%"}}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, vel quam. Cum dicta ratione, natus ad ut explicabo perferendis assumenda veritatis itaque! Nesciunt fuga obcaecati voluptatem praesentium, laborum atque unde.</h6>
 
                 </div>
 
@@ -130,7 +130,7 @@ const App = () => {
 
                         <div key={i} className="card-product">
 
-                            <img src={v.img} className="card-img-product" />
+                            <img src={`${api_url}/images/${v.img}`} className="card-img-product" />
 
                             <div className="card-img-overlay-product">
                                 <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>

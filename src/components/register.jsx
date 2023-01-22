@@ -123,7 +123,8 @@ const App = () => {
 
         })
             .then((d) => d.json())
-            .then((r) => { dispatch(load_data(r[0])); navigate("/delivery_app/brands"); setLoading(false) })
+
+            .then((r) => { dispatch(load_data(r[0])); navigate(`/delivery_app/brand-dashboard/${r[0]._id}`); setLoading(false) })
 
 
 

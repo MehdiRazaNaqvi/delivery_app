@@ -7,6 +7,7 @@ import { remove_from_cart } from "../store/counterslice"
 
 
 import Navbar from "./navbar"
+import { api_url } from "../config/api";
 
 
 const App = () => {
@@ -16,11 +17,6 @@ const App = () => {
 
 
     const dispatch = useDispatch()
-
-
-
-
-    console.log(count.price)
 
 
 
@@ -57,7 +53,7 @@ const App = () => {
 
                     <div key={i} className="card-product">
 
-                        <img src={v.img} className="card-img-product" />
+                        <img src={`${api_url}/images/${v.img}`} className="card-img-product" />
                         <div className="card-img-overlay-product">
                             <h6 className="card-title-product">{v.name}</h6>
                             <h6 className='price-product'>Rs. {v.price}</h6>

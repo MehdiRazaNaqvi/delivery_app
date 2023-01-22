@@ -84,9 +84,9 @@ export const counterSlice = createSlice({
 
     load_data: (state, payload) => {
 
-      state.brands = payload.payload.brands
-      state.cart = payload.payload.cart
-      state.users = payload.payload.users
+      state.brands = payload.payload?.brands
+      state.cart = payload.payload?.cart
+      state.users = payload.payload?.users
 
 
 
@@ -105,15 +105,15 @@ export const counterSlice = createSlice({
       const users_num = [];
 
 
-      state.brands.map(v => brands_prod.push(v.products.length))
-      state.brands.map(v => brands_names.push(v.brand))
+      state.brands?.map(v => brands_prod.push(v.products.length))
+      state.brands?.map(v => brands_names.push(v.brand))
 
-      state.cart?.map(v => { sales_names.push(v.v.name); })
+      state.cart?.map(v => { sales_names.push(v?.v?.name); })
       state.cart?.map(v => sales_num.push(1))
 
 
-      state.users.map(v => users_num.push(1))
-      state.users.map(v => users_names.push(v.username))
+      state.users?.map(v => users_num.push(1))
+      state.users?.map(v => users_names.push(v.username))
 
 
 
@@ -251,7 +251,7 @@ export const counterSlice = createSlice({
 
 
     amount_paid: (state, payload) => {
-  
+
       state.price = 0
       state.currentUser.cart = []
 
@@ -265,6 +265,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { current_user, load_data, add_cart, logout_local, filter_brand, voice_add_cart, remove_from_cart , amount_paid} = counterSlice.actions
+export const { current_user, load_data, add_cart, logout_local, filter_brand, voice_add_cart, remove_from_cart, amount_paid } = counterSlice.actions
 
 export default counterSlice.reducer

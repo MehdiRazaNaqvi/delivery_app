@@ -16,7 +16,7 @@ import { api_url, headers } from "../config/api"
 import { toast } from "react-toastify";
 import { load_data } from "../store/counterslice";
 
-
+import { useRef } from "react";
 
 
 
@@ -32,10 +32,6 @@ const App = () => {
 
 
 
-
-
-
-
     // const [logout, setlogout] = useState(false)
 
 
@@ -43,6 +39,8 @@ const App = () => {
 
     const brandn = useParams()
 
+
+    // const [brand , setBrand] = useState({ products: [] })
 
     let brand = { products: [] }
 
@@ -72,13 +70,13 @@ const App = () => {
 
 
     const calculate_total_revenue = (v) => {
-        total_revenue = total_revenue + parseInt(v.v.price)
+        total_revenue = total_revenue + parseInt(v.v?.price)
         j = j + 1
 
 
     }
 
-
+console.log(count.cart)
 
     {
         count.cart.map(v => brandn.v == v.brandId ? calculate_revenue(v) : calculate_total_revenue(v))
@@ -93,7 +91,7 @@ const App = () => {
 
     const [form_data, setform_data] = useState({ name: "", price: Number, img: "", brand: brandn.v })
 
-console.log(form_data)
+    console.log(form_data)
 
     const [userdata, setuserdata] = useState({
 
@@ -143,22 +141,41 @@ console.log(form_data)
     })
 
 
-
-
-    const gett = () => {
+    const inputFile = useRef(null)
 
 
 
-        const ready = (r) => {
-            setLoading(false)
+    const gett = (param) => {
+
+
+
+        const ready = (r, param) => {
             dispatch(load_data(r[0]))
 
-            toast.success("Product Added", {
-                position: toast.POSITION.TOP_CENTER
-            });
 
+            {
+                param == "remove" ?
+                    toast.success("Product Removed", {
+                        position: toast.POSITION.TOP_CENTER
+                    })
+                    :
+                    toast.success("Product Added", {
+                        position: toast.POSITION.TOP_CENTER
+                    });
+            }
+
+
+            {
+                param != "remove" && (
+                    brand.products = brand.products.push(form_data))
+            }
+
+            // brand.products = [...brand.products, { name: form_data.name, img: form_data.img, brand: form_data.brand, price: form_data.price }]
+            // setBrand({ ...brand, products: [...brand.products, form_data] })
             setform_data({ name: "", price: Number, img: "", brand: brandn.v })
 
+
+            setLoading(false)
 
 
         }
@@ -172,7 +189,7 @@ console.log(form_data)
 
         })
             .then((d) => d.json())
-            .then((r) => ready(r))
+            .then((r) => ready(r, param))
 
 
 
@@ -204,6 +221,73 @@ console.log(form_data)
     }
 
 
+
+
+    const uploadMedia = ({ data }) => {
+
+
+
+
+
+
+        fetch(`${api_url}/uploadFile`, {
+
+            method: 'POST',
+            // headers: headers,
+            body: data
+
+        })
+
+
+            .then((d) => d.json())
+            .then((r) => r.type == "success" && setform_data({ ...form_data, img: r.data }))
+
+            .catch(err => console.log(err))
+
+
+
+    }
+
+
+
+
+
+    const send_pic = (e) => {
+
+        e.preventDefault()
+
+        const file = e.target.files[0];
+
+
+        const formData = new FormData
+
+        formData.append("file", file)
+
+
+        uploadMedia({ data: formData })
+
+    }
+
+
+
+
+    const remove_item = (e) => {
+
+        // console.log(brand)
+        setLoading(true)
+        fetch(`${api_url}/dlt-prod`, {
+
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({ e, brand })
+
+        })
+            .then((d) => d.json())
+
+            .then((s) => s.type == "success" ? gett("remove") : toast.error("Something went wrong"))
+            .catch((err) => console.log(err))
+
+    }
 
 
     return (
@@ -334,8 +418,10 @@ console.log(form_data)
 
                     <input value={form_data.name} required type="text" placeholder="Product name" onChange={(e) => setform_data({ ...form_data, name: e.target.value })} className="form-control" />
                     <input value={form_data.price} required type="text" placeholder="Price" onChange={(e) => setform_data({ ...form_data, price: e.target.value })} className="form-control" />
-                    <input value={form_data.img} required placeholder="Image url" onChange={(e) => setform_data({ ...form_data, img: e.target.value })} type="text" className="form-control" />
-                    <button className="btn btn-primary add-btn" type="submit">{loading ? <Spinner color="light" size="sm" animation="border"></Spinner> : "Add Product"} </button>
+                    {/* <input value={form_data.img} required placeholder="Image url" onChange={(e) => setform_data({ ...form_data, img: e.target.value })} type="text" className="form-control" /> */}
+                    <input className="form-control" onChange={(e) => send_pic(e)} type='file' id='file' ref={inputFile} />
+
+                    <button disabled={loading} className="btn btn-primary add-btn" type="submit">{loading ? <Spinner color="light" size="sm" animation="border"></Spinner> : "Add Product"} </button>
 
                 </form>
 
@@ -343,33 +429,43 @@ console.log(form_data)
 
 
 
-            <div className="profile_l">
 
-                {brand.products.map((v, i) => (
+            {
+                brand.products.length > 0 ?
+
+                    <div className="profile_l">
 
 
-                    <div key={i} className="card-product">
+                        {brand.products.map((v, i) => (
 
-                        <img src={v.img} className="card-img-product" />
 
-                        <div className="card-img-overlay-product">
-                            <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>
-                            <h6 className='price-product'>Rs. {v.price}</h6>
-                            <button className="btn btn-outline-dark btn-small" >Remove</button>
+                            <div key={i} className="card-product">
 
-                        </div>
+                                <img src={`${api_url}/images/${v.img}`} className="card-img-product" />
+
+                                <div className="card-img-overlay-product">
+                                    <h6 className={v.name == count.search.item.name ? "card-title-product searched" : "card-title-product"} >{v.name}</h6>
+                                    <h6 className='price-product'>Rs. {v.price}</h6>
+                                    <button disabled={loading} className="btn btn-outline-dark btn-small" onClick={() => remove_item(v)} >{loading ? <Spinner color="dark" size="sm" animation="border"></Spinner> : "Remove"} </button>
+
+                                </div>
+
+                            </div>
+
+                        ))
+
+
+
+
+                        }
 
                     </div>
 
-                ))
+                    :
 
-                }
+                    <div style={{ width: "100%", textAlign: "center", color: "gray", fontSize: "1rem", fontWeight: 500 }}>No Products to Show</div>
 
-
-            </div>
-
-
-
+            }
 
         </div>
 

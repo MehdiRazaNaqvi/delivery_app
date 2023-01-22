@@ -44,7 +44,7 @@ const App = () => {
 
     const store = [];
 
-    count.brands.map((v) => store.push(v))
+    count.brands?.map((v) => store.push(v))
 
 
 
@@ -211,7 +211,7 @@ const App = () => {
 
 
 
-            {count.brands.length < 1 ?
+            {count.brands?.length < 1 ?
 
                 <div ref={container} className="anim">
                     {/* <img src={Gif} className="gif" /> */}
@@ -234,7 +234,7 @@ const App = () => {
                         <div key={i} onClick={() => navigate(`/delivery_app/brands/${v._id}`)} className="brandover">
 
                             <img className="brand-img" src={`${api_url}/images/${v.pic}`} />
-                            <p className="brand-name">{v.brand}</p>
+                            <p className="brand-name" style={{fontSize:"2rem"}}>{v.brand}</p>
 
 
 
