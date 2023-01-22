@@ -151,6 +151,7 @@ console.log(count.cart)
 
         const ready = (r, param) => {
             dispatch(load_data(r[0]))
+            setLoading(false)
 
 
             {
@@ -175,7 +176,6 @@ console.log(count.cart)
             setform_data({ name: "", price: Number, img: "", brand: brandn.v })
 
 
-            setLoading(false)
 
 
         }
