@@ -76,7 +76,7 @@ const App = () => {
 
     }
 
-console.log(count.cart)
+    console.log(count.cart)
 
     {
         count.cart.map(v => brandn.v == v.brandId ? calculate_revenue(v) : calculate_total_revenue(v))
@@ -91,8 +91,8 @@ console.log(count.cart)
 
     const [form_data, setform_data] = useState({ name: "", price: Number, img: "", brand: brandn.v })
 
-    console.log(form_data)
 
+    
     const [userdata, setuserdata] = useState({
 
 
@@ -150,6 +150,7 @@ console.log(count.cart)
 
 
         const ready = (r, param) => {
+
             dispatch(load_data(r[0]))
             setLoading(false)
 
@@ -166,10 +167,10 @@ console.log(count.cart)
             }
 
 
-            {
-                param != "remove" && (
-                    brand.products = brand.products.push(form_data))
-            }
+            // {
+            //     param != "remove" && (
+            //         brand.products = brand.products.push(form_data))
+            // }
 
             // brand.products = [...brand.products, { name: form_data.name, img: form_data.img, brand: form_data.brand, price: form_data.price }]
             // setBrand({ ...brand, products: [...brand.products, form_data] })
@@ -182,6 +183,7 @@ console.log(count.cart)
 
 
         // fetch('https://bhaiyya-server.herokuapp.com/getdata', {
+
         fetch(`${api_url}/getdata`, {
 
             method: 'GET',

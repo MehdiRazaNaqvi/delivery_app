@@ -14,7 +14,7 @@ import { api_url, headers } from "../config/api"
 import { toast } from "react-toastify";
 import { Spinner } from "reactstrap";
 import { useRef } from "react";
-import { update } from "firebase/database";
+
 
 const App = () => {
 
@@ -64,7 +64,6 @@ const App = () => {
 
 
 
-
     const uploadMedia = ({ data }) => {
 
 
@@ -89,8 +88,6 @@ const App = () => {
 
 
     }
-
-
 
 
 
@@ -124,7 +121,7 @@ const App = () => {
         })
             .then((d) => d.json())
 
-            .then((r) => { dispatch(load_data(r[0])); navigate(`/delivery_app/brand-dashboard/${r[0]._id}`); setLoading(false) })
+            .then((r) => { dispatch(load_data(r[0])); navigate(`/delivery_app/brands`); setLoading(false) })
 
 
 
