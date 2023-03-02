@@ -11,19 +11,12 @@ import { api_url } from "../config/api";
 
 
 const App = () => {
-    
+
     const count = useSelector(state => state.counter)
 
 
 
     const dispatch = useDispatch()
-
-
-
-
-
-
-
 
 
     const navigate = useNavigate();
@@ -32,7 +25,7 @@ const App = () => {
 
 
     return (
-        <div style={{ height: "minContent" }} className="cartpage">
+        <div style={{ height: "minContent", position: "absolute" }} className="cartpage">
 
             <Navbar />
 
@@ -41,13 +34,9 @@ const App = () => {
             {count.currentUser.cart.length == 0 ? <h4 className="empty">Cart is empty</h4> : null}
 
 
+            <h1 style={{ top: "0%", color: "gray", marginTop: "5rem", fontSize: "3rem" }}>Rs. {count.price}</h1>
 
-
-
-
-
-            <div className="cartgrid" style={{ position: "relative" }}>
-                <h1 style={{ position: "absolute", top: "0%", color: "gray" }}>Rs. {count.price}</h1>
+            <div className="cartgrid" style={{ position: "relative", marginTop: "10rem" }}>
                 {count.currentUser.cart.map((v, i) => (
 
 
@@ -67,10 +56,11 @@ const App = () => {
                 }
 
 
-                <button disabled={count.currentUser.cart.length == 0} onClick={() => navigate("/payment")} className="btn btn-success" style={{ position: "absolute", bottom: "0%" }}>Proceed to Pay</button>
 
             </div>
 
+
+            <button style={{ position: "absolute", bottom: "-10rem" }} disabled={count.currentUser.cart.length == 0 || count.price < 500} onClick={() => navigate("/payment")} className="btn btn-success">Proceed to Pay</button>
 
 
 

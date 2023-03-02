@@ -341,10 +341,11 @@ p {
     width: 100%;
     height: min-content;
 
+
     margin-top: 10rem;
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     /* grid-template-rows: repeat(3, 1fr); */
 
 
@@ -376,13 +377,14 @@ p {
     flex-direction: column;
 
     /* background-color: black; */
-    background-image: radial-gradient(rgb(255, 219, 152) 10%, transparent 11%),
-        radial-gradient(lightgreen 10%, transparent 11%);
+    /* background-image: radial-gradient(rgb(255, 219, 152) 10%, transparent 11%), */
+        /* radial-gradient(lightgreen 10%, transparent 11%); */
 
-    background-size: 40px 40px;
-    background-position: 0 0, 30px 30px;
-    background-repeat: repeat;
+    /* background-size: 40px 40px; */
+    /* background-position: 0 0, 30px 30px; */
+    /* background-repeat: repeat; */
 
+    
 }
 
 
@@ -396,8 +398,8 @@ p {
 
 
 .brand-img {
-    width: 12rem;
-    height: 12rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
 
     border: 0.5px solid rgb(222, 222, 222);
@@ -422,16 +424,27 @@ p {
     font-weight: 600;
     font-family: 'Ubuntu', sans-serif;
 
-    
+
 }
 
 
 
 
 
+@media screen and (max-width: 1000px) {
+
+
+    .brand-img {
+        width: 8rem;
+        height: 8rem;
+    }
 
 
 
+
+    
+
+}
 
 
 
@@ -440,10 +453,19 @@ p {
 @media screen and (max-width: 800px) {
 
 
+    .brand-grid {
+        grid-template-columns: repeat(2,1fr) !important;
+    
+    }
+    
 
+    .brandover{
+        width: 95%;
+    }
 
     .grid {
 
+        
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(5, 1fr);
 
@@ -481,82 +503,24 @@ p {
 
 
 
-@media screen and (max-width: 400px) {
 
 
-    a {
-        font-size: xx-small;
-    }
-
-
-
-    .logoimg {
-        width: 15%;
-        height: 80%;
-    }
-
-
-
-
-    .grid {
-        /* background-color: red; */
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        padding: 0;
-        margin-top: 10%;
-        padding-top: 20%;
-    }
-
-
-
-    .card {
-        width: 80%;
-
-    }
-
-
-    .card-title {
-        font-size: 45%;
-    }
-
-
-    .navbar {
-        padding-right: 5%;
-        height: 8%;
-        background-color: rgb(247, 247, 247);
-    }
-
-    .nav_inner {
-        min-width: 45%;
-        /* background-color: green; */
-    }
-
-
-    .logout {
-        height: 30vh;
-    }
-
-
+@media screen and (max-width: 650px) {
 
     .brand-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* grid-template-rows: repeat(2, 1fr); */
-        /* background-color: red; */
-        column-gap: 3%;
-        row-gap: 0%;
-        margin-top: 7rem;
+        grid-template-columns: repeat(1,1fr) !important;
+    
+    }
+    
+    
+    .brandover{
+        width: 95%;
     }
 
-    .brandover {
-        width: 90%;
-        height: 60%;
+    .brand-img{
+        width:12rem;
+        height:12rem;
     }
-
-
-    .brand-name {
-        font-size: x-small;
-    }
-
-
 
 }
+

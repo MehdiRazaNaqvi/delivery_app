@@ -68,9 +68,6 @@ const App = () => {
 
 
 
-
-
-
         fetch(`${api_url}/uploadFile`, {
 
             method: 'POST',
@@ -81,16 +78,14 @@ const App = () => {
 
 
             .then((d) => d.json())
-            .then((r) => r.type == "success" && setregister_data({ ...register_data, pic: r.data }))
-
-            .catch(err => console.log(err))
+            .then((r) => r.data && setregister_data({ ...register_data, pic: r.data }))
 
 
 
     }
 
 
-
+    
     const send_pic = (e) => {
 
         e.preventDefault()

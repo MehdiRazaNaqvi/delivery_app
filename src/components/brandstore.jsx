@@ -33,13 +33,6 @@ const App = () => {
     // const [logout, setlogout] = useState(false)
 
 
-
-
-
-
-
-
-
     const add_to_cart = (payload) => {
 
         dispatch(add_cart(payload.v))
@@ -101,16 +94,16 @@ const App = () => {
 
                 <div className="pic_div">
 
-                    <img className="main_img" src={`${api_url}/images/${product.pic}`} />
+                    <img className="main_img" src={`${api_url}/images/${product?.pic}`} />
 
                 </div>
 
 
                 <div className="details_div">
 
-                    <h2 style={{ fontSize: "6rem" }} className="card-title-product">{product.brand}</h2>
-                    <h6>established 5 years ago</h6>
-                    <h6 style={{ width:"85%"}}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, vel quam. Cum dicta ratione, natus ad ut explicabo perferendis assumenda veritatis itaque! Nesciunt fuga obcaecati voluptatem praesentium, laborum atque unde.</h6>
+                    <h2 style={{ fontSize: "6rem" }} className="card-title-product">{product?.brand}</h2>
+                    {/* <h6>established 5 years ago</h6> */}
+                    <h6 style={{ width: "85%" }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, vel quam. Cum dicta ratione, natus ad ut explicabo perferendis assumenda veritatis itaque! Nesciunt fuga obcaecati voluptatem praesentium, laborum atque unde.</h6>
 
                 </div>
 

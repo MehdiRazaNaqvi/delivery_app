@@ -129,37 +129,15 @@ const App = () => {
         <div className="homescreen" >
 
 
-
-
-
-
-
             <div className="part1">
 
                 {/* <h1 className="heading" >We deliver rich and fast</h1> */}
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/1280px-Emart_Logo.svg.png" className="heading" />
 
-
-
-
                 <div className="middle" ref={container}></div>
 
 
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
         </div>

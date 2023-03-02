@@ -17,8 +17,9 @@ import { toast } from "react-toastify";
 import { load_data } from "../store/counterslice";
 
 import { useRef } from "react";
-
-
+import axios from "axios";
+import { Input } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -60,6 +61,7 @@ const App = () => {
 
 
 
+    const navigate = useNavigate()
 
 
     const calculate_revenue = (v) => {
@@ -76,7 +78,7 @@ const App = () => {
 
     }
 
-    console.log(count.cart)
+
 
     {
         count.cart.map(v => brandn.v == v.brandId ? calculate_revenue(v) : calculate_total_revenue(v))
@@ -92,7 +94,7 @@ const App = () => {
     const [form_data, setform_data] = useState({ name: "", price: Number, img: "", brand: brandn.v })
 
 
-    
+
     const [userdata, setuserdata] = useState({
 
 
@@ -147,7 +149,7 @@ const App = () => {
 
     const gett = (param) => {
 
-
+        setLoading(true)
 
         const ready = (r, param) => {
 
@@ -203,7 +205,7 @@ const App = () => {
     const add_product = () => {
 
 
-        setLoading(true)
+        // setLoading(true)
 
         fetch(`${api_url}/add-prod`, {
 
@@ -213,7 +215,8 @@ const App = () => {
 
         })
             .then((d) => d.json())
-            .then((s) => s.type == "success" ? gett() : toast.error("Something went wrong"))
+            .then((s) => s.type = "success" ? gett() : toast.error("Something went wrong"))
+            // .then(res => console.log(res))
             .catch((err) => toast.error("Network Problem"))
 
 
@@ -269,6 +272,22 @@ const App = () => {
         uploadMedia({ data: formData })
 
     }
+
+
+
+
+    const deleteBrand = () => {
+        setLoading(true)
+
+        axios.post(`${api_url}/delete_brand`, {
+            id: brandn.v
+        })
+
+            .then(res => { setLoading(false); toast.success("Your Brand is Deleted"); navigate("/delivery_app") })
+            .catch(err => { setLoading(false); toast.error("Something went wrong") })
+    }
+
+
 
 
 
@@ -414,16 +433,17 @@ const App = () => {
 
             <div className="form">
 
-                <h6>Add your product</h6>
+                <h3 style={{ margin: "1.5rem" }}>Add your product</h3>
 
                 <form style={{ "margin": "0%", "padding": "0%", "width": "100%", "display": "flex", "flexDirection": "column", "alignItems": "center", "gap": "1.5rem" }} action="" onSubmit={(e) => { e.preventDefault(); add_product() }}>
 
-                    <input value={form_data.name} required type="text" placeholder="Product name" onChange={(e) => setform_data({ ...form_data, name: e.target.value })} className="form-control" />
-                    <input value={form_data.price} required type="text" placeholder="Price" onChange={(e) => setform_data({ ...form_data, price: e.target.value })} className="form-control" />
+                    <Input size="lg" value={form_data.name} required type="text" placeholder="Product name" onChange={(e) => setform_data({ ...form_data, name: e.target.value })} className="form-control" />
+                    <Input size="lg" value={form_data.price} required type="text" placeholder="Price" onChange={(e) => setform_data({ ...form_data, price: e.target.value })} className="form-control" />
                     {/* <input value={form_data.img} required placeholder="Image url" onChange={(e) => setform_data({ ...form_data, img: e.target.value })} type="text" className="form-control" /> */}
-                    <input className="form-control" onChange={(e) => send_pic(e)} type='file' id='file' ref={inputFile} />
+                    <Input size="lg" required className="form-control" onChange={(e) => send_pic(e)} type='file' id='file' ref={inputFile} />
 
-                    <button disabled={loading} className="btn btn-primary add-btn" type="submit">{loading ? <Spinner color="light" size="sm" animation="border"></Spinner> : "Add Product"} </button>
+                    <button disabled={loading} className="btn btn-primary add-btn" type="submit">{loading ? <Spinner color="light" size="lg" animation="border"></Spinner> : "Add Product"} </button>
+                    <button onClick={() => { deleteBrand() }} disabled={loading} className="btn btn-danger add-btn" type="button">{loading ? <Spinner color="light" size="lg" animation="border"></Spinner> : "Delete Brand"} </button>
 
                 </form>
 
